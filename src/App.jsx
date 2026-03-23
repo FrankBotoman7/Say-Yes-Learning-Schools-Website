@@ -357,7 +357,7 @@ const HomePage = ({ setCurrentPage }) => {
 };
 
 // About Page Component
-const AboutPage = () => {
+const AboutPage = ({ setCurrentPage }) => {
   return (
     <div className="pt-20 pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -464,8 +464,15 @@ const AboutPage = () => {
               education.
             </p>
             <a
-              href="#donate"
-              className="text-[#006400] font-semibold hover:underline"
+              onClick={() => {
+                setCurrentPage("Contact");
+                setTimeout(() => {
+                  document
+                    .getElementById("donate")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }, 100);
+              }}
+              className="text-[#006400] font-semibold hover:underline cursor-pointer"
             >
               View Donation Options →
             </a>
@@ -1062,7 +1069,7 @@ export default function App() {
       case "Home":
         return <HomePage setCurrentPage={setCurrentPage} />;
       case "About":
-        return <AboutPage />;
+        return <AboutPage setCurrentPage={setCurrentPage} />;
       case "Programs":
         return <ProgramsPage />;
       case "Team":
