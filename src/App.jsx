@@ -778,11 +778,18 @@ const ContactPage = () => {
                 🌍 International Donation
               </h3>
               <p className="text-gray-700 font-semibold mb-3">
-                Use: www.unfcu.org
+                To donate internationally use:{" "}
+                <a
+                  href="https://www.unfcu.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  www.unfcu.org
+                </a>
               </p>
               <div className="space-y-2 text-gray-700 text-sm">
                 <p>
-                  <strong>Name:</strong> Lizzie T Dube
+                  <strong>Lizzie T Dube</strong>
                 </p>
                 <p>
                   <strong>Member Number:</strong> 8147202
@@ -791,10 +798,13 @@ const ContactPage = () => {
                   <strong>Checking Account:</strong> 20007843005
                 </p>
                 <p>
-                  <strong>ABA/Bank Routing Number:</strong> 226078609
+                  <strong>P.O. Box:</strong> 30230, Lilongwe, Malawi
                 </p>
               </div>
               <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm space-y-2">
+                <p>
+                  <strong>ABA/Bank Routing Number:</strong> 226078609
+                </p>
                 <p>
                   <strong>United Nations Federal Credit Union, NY</strong>
                 </p>
@@ -807,43 +817,35 @@ const ContactPage = () => {
                   NY 10017, USA
                 </p>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm">
+              <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm space-y-1">
                 <p>
-                  <strong>P.O. Box:</strong> 30230, Lilongwe, Malawi
+                  <strong>Phone:</strong> 265885871388 / 265997544244
+                </p>
+                <p>
+                  <strong>Email:</strong> lizzie.dube@yahoo.com
                 </p>
               </div>
             </div>
 
             <div className="p-6 bg-white rounded-lg border border-green-200">
               <h3 className="text-xl font-bold text-[#006400] mb-4">
-                🇲🇼 Local Donation (Malawi)
+                Local Donation (Malawi)
               </h3>
-              <p className="text-gray-700 text-sm mb-4 space-y-2">
-                <div>
-                  <strong>Bank:</strong> National Bank of Malawi
-                </div>
-                <div>
-                  <strong>Account Name:</strong> Say Yes Learning Schools
-                </div>
-                <div>
-                  <strong>Account Number:</strong> 1012897517
-                </div>
-                <div>
-                  <strong>Swift Code:</strong> NBMAMWMW002
-                </div>
+              <p className="text-gray-700 font-semibold mb-3">
+                To donate locally use:
               </p>
-              <div className="mt-4 pt-4 border-t border-green-200">
-                <p className="text-gray-700 font-semibold mb-3">
-                  Contact Information:
+              <div className="space-y-2 text-gray-700 text-sm">
+                <p>
+                  <strong>National Bank of Malawi</strong>
                 </p>
-                <p className="text-gray-700 text-sm mb-2">
-                  <strong>Email:</strong> lizzie.dube@yahoo.com
+                <p>
+                  <strong>Say Yes Learning Schools</strong>
                 </p>
-                <p className="text-gray-700 text-sm mb-2">
-                  <strong>Phone:</strong> +265 885 871 388
+                <p>
+                  <strong>Account Number:</strong> 1012897517
                 </p>
-                <p className="text-gray-700 text-sm">
-                  <strong>Phone:</strong> +265 997 544 244
+                <p>
+                  <strong>Swiftcode:</strong> NBMAMWMW002
                 </p>
               </div>
             </div>
