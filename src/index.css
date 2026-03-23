@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #f8fafc;
+  color: #1f2937;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Marquee animation for news headlines */
+@keyframes marquee-track {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-track {
+  animation: marquee-track linear infinite;
+  will-change: transform;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #004b23;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #32cd32;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2eb82e;
+}
+
+/* Smooth transitions */
+button {
+  transition: all 0.3s ease;
+}
+
+input, textarea {
+  transition: all 0.3s ease;
+}
+
+/* Gradient backgrounds */
+.gradient-cyan {
+  background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+}

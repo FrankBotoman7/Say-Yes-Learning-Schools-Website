@@ -1,0 +1,188 @@
+# SAY YES LEARNING SCHOOLS (SYLS) - MASTER DATA FILE
+## Complete Website Information
+
+---
+
+## 🏢 ORGANIZATION INFORMATION
+
+**Organization Name:** Say Yes Learning Schools
+
+**Acronym:** SYLS
+
+**Type:** Educational Institution
+
+**Location:** Malawi
+
+---
+
+## 📞 CONTACT INFORMATION
+
+**Address:** Malawi
+
+**Email:** info@syls.edu.mw
+
+**Business Hours:** Monday - Friday: 7:30 AM - 4:00 PM
+
+---
+
+## 🎯 MISSION & VALUES
+
+**Mission Statement:** 
+"To provide comprehensive, quality education that empowers students to become leaders, innovators, and responsible citizens who contribute positively to society."
+
+**Vision Statement:**
+"To be recognized as a leading institution that produces well-rounded graduates equipped with academic excellence, strong values, and the ability to make meaningful contributions to society."
+
+**Organization Values:**
+1. **Excellence** - Providing outstanding education and services
+2. **Integrity** - Operating with honesty and transparency
+3. **Innovation** - Embracing modern approaches and creative solutions
+4. **Compassion** - Caring for and supporting every student
+
+---
+
+## 📋 BOARD OF DIRECTORS
+
+### Board Members (11 Total):
+1. **Ali Barnet**
+2. **Andrew Mtukuleni**
+3. **Catherine Chisuse**
+4. **Ernest Chilalika**
+5. **Esther Nyirenda**
+6. **Jenala Bota**
+7. **Judie Anafi**
+8. **Judith Lungu**
+9. **Lizzie Muyawa Dube**
+10. **Lundu Soliat**
+11. **Shupekire Jere**
+
+---
+
+## 🎓 EDUCATIONAL PROGRAMS
+
+### Program 1: Academic Excellence
+**Description:** Rigorous curriculum designed to foster critical thinking and lifelong learning
+
+**Key Areas:**
+- Mathematics
+- Sciences
+- Languages
+- Social Studies
+
+---
+
+### Program 2: Sports & Recreation
+**Description:** Comprehensive athletic programs promoting physical fitness and teamwork
+
+**Key Areas:**
+- Team Sports
+- Individual Sports
+- Fitness Programs
+- Competitions
+
+---
+
+### Program 3: Arts & Culture
+**Description:** Creative programs encouraging artistic expression and cultural awareness
+
+**Key Areas:**
+- Music
+- Visual Arts
+- Drama
+- Cultural Events
+
+---
+
+### Program 4: Life Skills
+**Description:** Development programs for character building and personal growth
+
+**Key Areas:**
+- Leadership Development
+- Ethics & Values
+- Communication Skills
+- Problem Solving
+
+---
+
+## 💼 WHY CHOOSE SYLS?
+
+1. **Experienced and dedicated faculty members**
+2. **Comprehensive curriculum with practical learning**
+3. **State-of-the-art facilities and resources**
+4. **Emphasis on character and leadership development**
+5. **Strong community and parental involvement**
+6. **Proven track record of student excellence**
+7. **Safe and nurturing learning environment**
+8. **Holistic approach to education**
+
+---
+
+## 🌐 WEB PAGES STRUCTURE
+
+1. **Home** - Main landing page with mission statement
+2. **About** - Institution information and vision
+3. **Programs** - Academic, sports, arts, and life skills programs
+4. **Team** - Board members gallery with photos
+5. **Gallery** - Photo collections of school events and activities
+6. **Contact** - Contact form and information
+
+---
+
+## 🎨 BRANDING & DESIGN
+
+**Primary Color:** Amber (#b45309)
+**Secondary Color:** Yellow (#fbbf24)
+**Accent Color:** Gold (#fcd34d)
+**Text Color:** White & Amber variations
+**Fonts:** Sans-serif (modern, clean typefaces)
+
+**Logo:** "SYLS" text-based logo in yellow/gold gradient
+
+---
+
+## 📊 WEBSITE STATISTICS
+
+- **Total Pages:** 6
+- **Board Members:** 11
+- **Programs Offered:** 4 main categories
+- **Launch Date:** March 2026
+
+---
+
+## 🔒 SECURITY & COMPLIANCE
+
+- **Privacy Focused:** Student data protection
+- **Responsive Design:** Works on all devices
+- **Contact Forms:** Secure message handling
+- **Accessibility:** WCAG compliant design
+
+---
+
+## 📸 MEDIA ASSETS
+
+**Board Member Photos:**
+- All 11 board members have professional passport-style photos
+- Located in `/public/images/board-members/`
+
+**Gallery Categories:**
+- School Events
+- Academic Activities
+- Sports & Recreation
+- Cultural Programs
+
+---
+
+## 🚀 TECHNOLOGY STACK
+
+- **Frontend:** React 18.2.0
+- **Build Tool:** Vite
+- **Styling:** Tailwind CSS
+- **Hosting:** Can be deployed to any static hosting service
+
+---
+
+## 📝 NOTES
+
+This is a client-side rendered website with no database requirements. All content is static and managed through the React components. The website is fully responsive and optimized for mobile, tablet, and desktop devices.
+
+Updated: March 23, 2026
