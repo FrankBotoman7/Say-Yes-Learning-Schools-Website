@@ -414,6 +414,63 @@ const AboutPage = () => {
             </div>
           </div>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+          <div className="p-8 bg-[#006400] rounded-lg border border-green-600">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              📍 Where We Work
+            </h2>
+            <p className="text-green-100 leading-relaxed">
+              Classes will start in September 2026 in Area 23 at a rental place
+              while we wait to build a structure of Say Yes Learning Schools in
+              the near future pending availability of funding at a place already
+              bought.
+            </p>
+          </div>
+
+          <div className="p-8 bg-[#006400] rounded-lg border border-green-600">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              🚀 Current Activities
+            </h2>
+            <p className="text-green-100 leading-relaxed">
+              Right now, Say Yes Learning Schools in Malawi is in the middle of
+              sourcing funds to build a school structure of its own in Lilongwe,
+              Malawi.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="p-8 bg-blue-50 rounded-lg border border-blue-300">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              ✨ News and Stories
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              The Executive Director has spoken to several families that want
+              their children to be placed in Say Yes Learning Schools. This is
+              exciting and a nice start! We are grateful for the community's
+              trust and look forward to welcoming our first students.
+            </p>
+          </div>
+
+          <div className="p-8 bg-green-50 rounded-lg border border-green-300">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              🤝 Get Involved
+            </h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Learn how you can donate to make a difference in children's
+              education in Malawi, especially for girls. Your donation will help
+              Say Yes Learning Schools build classrooms and brighten children's
+              education.
+            </p>
+            <a
+              href="#donate"
+              className="text-[#006400] font-semibold hover:underline"
+            >
+              View Donation Options →
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -638,26 +695,6 @@ const TeamPage = () => {
 
 // Gallery Page Component
 const GalleryPage = () => {
-  const galleryCategories = [
-    {
-      title: "School Events",
-      description:
-        "Memorable moments from our school gatherings and celebrations",
-    },
-    {
-      title: "Academic Activities",
-      description: "Students engaged in learning and academic excellence",
-    },
-    {
-      title: "Sports & Recreation",
-      description: "Athletes showcasing skill and teamwork",
-    },
-    {
-      title: "Cultural Programs",
-      description: "Celebrations of arts, music, and culture",
-    },
-  ];
-
   return (
     <div className="pt-20 pb-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -666,28 +703,16 @@ const GalleryPage = () => {
           Capturing moments of excellence and growth
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {galleryCategories.map((category, idx) => (
-            <div
-              key={idx}
-              className="p-12 bg-[#006400] rounded-lg border border-green-600 hover:shadow-xl transition-all group cursor-pointer"
-            >
-              <div className="text-4xl mb-4 text-center">📸</div>
-              <h3 className="text-2xl font-bold text-white mb-2 text-center">
-                {category.title}
-              </h3>
-              <p className="text-green-100 text-center">
-                {category.description}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* <div className="mt-12 p-8 bg-[#006400] rounded-lg border border-green-600">
-          <p className="text-green-100 text-center">
-            Photo gallery content can be added and managed by uploading images.
+        <div className="p-12 bg-blue-50 rounded-lg border border-blue-300 text-center">
+          <div className="text-5xl mb-4">🎨</div>
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">Coming Soon</h3>
+          <p className="text-gray-700 text-lg leading-relaxed max-w-2xl mx-auto">
+            Our photo gallery is not available at this moment. We are working on
+            showcasing memorable moments from our school events, academic
+            activities, sports programs, and cultural celebrations. Check back
+            later for updates!
           </p>
-        </div> */}
+        </div>
       </div>
     </div>
   );
@@ -724,131 +749,233 @@ const ContactPage = () => {
           Get in touch with Say Yes Learning Schools
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                  placeholder="Your name"
-                />
+        {/* Donation Section */}
+        <div
+          id="donate"
+          className="mb-16 p-8 bg-green-50 rounded-lg border border-green-300"
+        >
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            💚 Get Involved - Make a Donation
+          </h2>
+          <p className="text-gray-700 mb-6 leading-relaxed">
+            Learn how you can donate to make a difference in children's
+            education in Malawi, especially girls. Please consider making a
+            donation and help Say Yes Learning Schools build classrooms. Your
+            help will ensure and brighten the children's education,
+            simultaneously making our world a better place for all.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-6 bg-white rounded-lg border border-green-200">
+              <h3 className="text-xl font-bold text-[#006400] mb-4">
+                🌍 International Donation
+              </h3>
+              <p className="text-gray-700 font-semibold mb-3">
+                Use: www.unfcu.org
+              </p>
+              <div className="space-y-2 text-gray-700 text-sm">
+                <p>
+                  <strong>Name:</strong> Lizzie T Dube
+                </p>
+                <p>
+                  <strong>Member Number:</strong> 8147202
+                </p>
+                <p>
+                  <strong>Checking Account:</strong> 20007843005
+                </p>
+                <p>
+                  <strong>ABA/Bank Routing Number:</strong> 226078609
+                </p>
               </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                  placeholder="your@email.com"
-                />
+              <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm space-y-2">
+                <p>
+                  <strong>United Nations Federal Credit Union, NY</strong>
+                </p>
+                <p>
+                  <strong>Bank Address:</strong>
+                </p>
+                <p>
+                  2 United Nations Plaza, New York
+                  <br />
+                  NY 10017, USA
+                </p>
               </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                  placeholder="Message subject"
-                />
+              <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm">
+                <p>
+                  <strong>P.O. Box:</strong> 30230, Lilongwe, Malawi
+                </p>
               </div>
-              <div>
-                <label className="block text-gray-700 font-semibold mb-2">
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="5"
-                  className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                  placeholder="Your message here..."
-                ></textarea>
+            </div>
+
+            <div className="p-6 bg-white rounded-lg border border-green-200">
+              <h3 className="text-xl font-bold text-[#006400] mb-4">
+                🇲🇼 Local Donation (Malawi)
+              </h3>
+              <p className="text-gray-700 text-sm mb-4 space-y-2">
+                <div>
+                  <strong>Bank:</strong> National Bank of Malawi
+                </div>
+                <div>
+                  <strong>Account Name:</strong> Say Yes Learning Schools
+                </div>
+                <div>
+                  <strong>Account Number:</strong> 1012897517
+                </div>
+                <div>
+                  <strong>Swift Code:</strong> NBMAMWMW002
+                </div>
+              </p>
+              <div className="mt-4 pt-4 border-t border-green-200">
+                <p className="text-gray-700 font-semibold mb-3">
+                  Contact Information:
+                </p>
+                <p className="text-gray-700 text-sm mb-2">
+                  <strong>Email:</strong> lizzie.dube@yahoo.com
+                </p>
+                <p className="text-gray-700 text-sm mb-2">
+                  <strong>Phone:</strong> +265 885 871 388
+                </p>
+                <p className="text-gray-700 text-sm">
+                  <strong>Phone:</strong> +265 997 544 244
+                </p>
               </div>
-              <button
-                type="submit"
-                className="w-full bg-[#006400] hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105"
-              >
-                Send Message
-              </button>
-            </form>
+            </div>
           </div>
+        </div>
 
-          <div className="space-y-6">
-            <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-              <h3 className="text-xl font-bold text-white mb-3">📍 Location</h3>
-              <p className="text-green-100">Say Yes Learning Schools</p>
-              <p className="text-green-100">Malawi</p>
+        {/* Contact Form */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            Send Us a Message
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
+                    placeholder="your@email.com"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
+                    placeholder="Message subject"
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-semibold mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows="5"
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
+                    placeholder="Your message here..."
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-[#006400] hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105"
+                >
+                  Send Message
+                </button>
+              </form>
             </div>
 
-            <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-              <h3 className="text-xl font-bold text-white mb-3">
-                📞 Contact Information
-              </h3>
-              <p className="text-green-100 mb-2">lizzie.dube@yahoo.com</p>
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-green-100 hover:text-white underline underline-offset-4"
-              >
-                WhatsApp: +265885871388
-              </a>
-            </div>
+            <div className="space-y-6">
+              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  📍 Location
+                </h3>
+                <p className="text-green-100">Say Yes Learning Schools</p>
+                <p className="text-green-100">Malawi</p>
+              </div>
 
-            <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-              <h3 className="text-xl font-bold text-white mb-3">
-                🕐 Office Hours
-              </h3>
-              <p className="text-green-100">Monday - Friday</p>
-              <p className="text-green-100">7:30 AM - 4:00 PM</p>
-            </div>
+              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  📞 Contact Information
+                </h3>
+                <p className="text-green-100 mb-2">lizzie.dube@yahoo.com</p>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-100 hover:text-white underline underline-offset-4"
+                >
+                  WhatsApp: +265885871388
+                </a>
+              </div>
 
-            <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-              <h3 className="text-xl font-bold text-white mb-3">
-                🔗 Connect With Us
-              </h3>
-              <div className="flex space-x-3">
-                <button
-                  type="button"
-                  className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition"
-                >
-                  f
-                </button>
-                <button
-                  type="button"
-                  className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition"
-                >
-                  in
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    window.location.href = whatsappLink;
-                  }}
-                  aria-label="Open WhatsApp"
-                  className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center transition"
-                >
-                  <WhatsAppIcon />
-                </button>
+              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  🕐 Office Hours
+                </h3>
+                <p className="text-green-100">Monday - Friday</p>
+                <p className="text-green-100">7:30 AM - 4:00 PM</p>
+              </div>
+
+              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
+                <h3 className="text-xl font-bold text-white mb-3">
+                  🔗 Connect With Us
+                </h3>
+                <div className="flex space-x-3">
+                  <button
+                    type="button"
+                    className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition"
+                  >
+                    f
+                  </button>
+                  <button
+                    type="button"
+                    className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition"
+                  >
+                    in
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.location.href = whatsappLink;
+                    }}
+                    aria-label="Open WhatsApp"
+                    className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center transition"
+                  >
+                    <WhatsAppIcon />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
