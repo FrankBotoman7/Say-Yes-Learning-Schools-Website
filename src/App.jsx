@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react'
 
+const navItems = ['Home', 'About', 'Programs', 'Team', 'Gallery', 'Contact']
+
+const WhatsAppIcon = ({ className = 'w-5 h-5' }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+    <path d="M19.05 4.91A9.82 9.82 0 0 0 12.03 2C6.62 2 2.2 6.4 2.2 11.82c0 1.73.45 3.42 1.31 4.91L2 22l5.42-1.42a9.83 9.83 0 0 0 4.6 1.17h.01c5.41 0 9.83-4.4 9.84-9.82A9.77 9.77 0 0 0 19.05 4.91Zm-7.02 15.17h-.01a8.13 8.13 0 0 1-4.14-1.13l-.3-.18-3.22.84.86-3.14-.2-.32a8.13 8.13 0 0 1-1.25-4.33c0-4.5 3.68-8.16 8.2-8.16 2.19 0 4.25.85 5.79 2.39a8.1 8.1 0 0 1 2.4 5.78c0 4.5-3.69 8.16-8.13 8.16Zm4.47-6.1c-.24-.12-1.4-.69-1.62-.77-.22-.08-.38-.12-.54.12-.16.24-.62.77-.76.93-.14.16-.28.18-.52.06-.24-.12-1-.37-1.9-1.18-.7-.63-1.17-1.4-1.31-1.64-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.68 2.56 4.08 3.59.57.25 1.02.4 1.37.51.58.18 1.1.15 1.51.09.46-.07 1.4-.57 1.6-1.13.2-.55.2-1.03.14-1.13-.06-.1-.22-.16-.46-.28Z" />
+  </svg>
+)
+
 // Navigation Component
 const Navigation = ({ currentPage, setCurrentPage }) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  const navItems = ['Home', 'About', 'Programs', 'Team', 'Gallery', 'Contact']
 
   return (
     <nav className="fixed w-full bg-[#006400] shadow-lg z-50">
@@ -21,10 +27,13 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
             {navItems.map(item => (
               <button
                 key={item}
-                onClick={() => setCurrentPage(item)}
+                type="button"
+                onClick={() => currentPage !== item && setCurrentPage(item)}
+                disabled={currentPage === item}
+                aria-current={currentPage === item ? 'page' : undefined}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
                   currentPage === item
-                    ? 'bg-green-500 text-green-950'
+                    ? 'bg-green-500 text-green-950 cursor-default'
                     : 'text-green-100 hover:bg-green-700 hover:text-white'
                 }`}
               >
@@ -48,13 +57,18 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
             {navItems.map(item => (
               <button
                 key={item}
+                type="button"
                 onClick={() => {
-                  setCurrentPage(item)
+                  if (currentPage !== item) {
+                    setCurrentPage(item)
+                  }
                   setIsOpen(false)
                 }}
+                disabled={currentPage === item}
+                aria-current={currentPage === item ? 'page' : undefined}
                 className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${
                   currentPage === item
-                    ? 'bg-green-500 text-green-950'
+                    ? 'bg-green-500 text-green-950 cursor-default'
                     : 'text-green-100 hover:bg-green-700 hover:text-white'
                 }`}
               >
@@ -499,6 +513,9 @@ const GalleryPage = () => {
 
 // Contact Page Component
 const ContactPage = () => {
+  const whatsappNumber = '265885871388'
+  const whatsappLink = `https://wa.me/${whatsappNumber}`
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -513,8 +530,8 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert('Thank you for your message! We will get back to you soon.')
     setFormData({ name: '', email: '', subject: '', message: '' })
+    window.location.href = whatsappLink
   }
 
   return (
@@ -592,7 +609,15 @@ const ContactPage = () => {
 
             <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
               <h3 className="text-xl font-bold text-white mb-3">📞 Contact Information</h3>
-              <p className="text-green-100 mb-2">info@syls.edu.mw</p>
+              <p className="text-green-100 mb-2">lizzie.dube@yahoo.com</p>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-100 hover:text-white underline underline-offset-4"
+              >
+                WhatsApp: +265885871388
+              </a>
             </div>
 
             <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
@@ -604,11 +629,20 @@ const ContactPage = () => {
             <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
               <h3 className="text-xl font-bold text-white mb-3">🔗 Connect With Us</h3>
               <div className="flex space-x-3">
-                {['f', 'in', 'tw'].map((social, idx) => (
-                  <button key={idx} className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition">
-                    {social}
-                  </button>
-                ))}
+                <button type="button" className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition">
+                  f
+                </button>
+                <button type="button" className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition">
+                  in
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { window.location.href = whatsappLink }}
+                  aria-label="Open WhatsApp"
+                  className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center transition"
+                >
+                  <WhatsAppIcon />
+                </button>
               </div>
             </div>
           </div>
@@ -619,7 +653,7 @@ const ContactPage = () => {
 }
 
 // Footer Component
-const Footer = () => {
+const Footer = ({ currentPage, setCurrentPage }) => {
   return (
       <footer className="bg-green-900 border-t border-green-800 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -631,10 +665,17 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-white mb-4">Navigation</h4>
             <ul className="space-y-2 text-amber-200 text-sm">
-              <li><a href="#" className="hover:text-yellow-300">Home</a></li>
-              <li><a href="#" className="hover:text-yellow-300">About</a></li>
-              <li><a href="#" className="hover:text-yellow-300">Programs</a></li>
-              <li><a href="#" className="hover:text-yellow-300">Contact</a></li>
+              {navItems.filter(item => item !== currentPage).map(item => (
+                <li key={item}>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage(item)}
+                    className="text-sm text-amber-200 hover:text-yellow-300 transition"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
@@ -648,7 +689,8 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-white mb-4">Information</h4>
             <p className="text-amber-200 text-sm">Malawi</p>
-            <p className="text-amber-200 text-sm">info@syls.edu.mw</p>
+            <p className="text-amber-200 text-sm">lizzie.dube@yahoo.com</p>
+            <p className="text-amber-200 text-sm">+265885871388</p>
           </div>
         </div>
         <div className="border-t border-amber-800 pt-8 text-center text-amber-300">
@@ -689,7 +731,7 @@ export default function App() {
       <main className="pt-10">
         {renderPage()}
       </main>
-      <Footer />
+      <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   )
 }
