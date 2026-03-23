@@ -200,10 +200,10 @@ const HomePage = ({ setCurrentPage }) => {
             className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
             style={{
               backgroundImage: `url(${heroSlides[currentSlide].image})`,
-              filter: "blur(10px)",
+              filter: "brightness(0.95) saturate(1.05)",
             }}
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/35" />
 
           {/* Arrow Controls */}
           <button
