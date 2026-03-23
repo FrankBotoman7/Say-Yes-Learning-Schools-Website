@@ -744,8 +744,14 @@ const ContactPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const { name, email, subject, message } = formData;
+    const whatsappMessage = `Hello, my name is ${name}.\nEmail: ${email}\n\nSubject: ${subject}\n\nMessage: ${message}`;
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
+      "_blank",
+    );
     setFormData({ name: "", email: "", subject: "", message: "" });
-    window.location.href = whatsappLink;
   };
 
   return (
