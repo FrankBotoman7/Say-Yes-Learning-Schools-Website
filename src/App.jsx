@@ -249,7 +249,7 @@ const HomePage = ({ setCurrentPage }) => {
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
               {heroSlides[currentSlide].titleSub}
-              <span className="block text-[#006400]">
+              <span className="block text-white">
                 {heroSlides[currentSlide].titleMain}
               </span>
             </h1>
