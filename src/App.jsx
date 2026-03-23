@@ -655,9 +655,9 @@ const TeamPage = () => {
           {boardMembers.map((member, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all bg-white shadow-md hover:shadow-lg flex"
+              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all bg-white shadow-md hover:shadow-lg flex flex-col md:flex-row"
             >
-              <div className="w-48 h-48 flex-shrink-0 overflow-hidden bg-[#006400]">
+              <div className="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden bg-[#006400]">
                 <img
                   src={member.photo}
                   alt={member.name}
