@@ -181,9 +181,9 @@ const FixedMarquee = () => {
   const marqueeHeadlines = [...newsHeadlines, ...newsHeadlines];
 
   return (
-    <div className="fixed top-16 left-0 right-0 z-40 overflow-hidden h-10 bg-[#006400] flex items-center shadow-md">
+    <div className="fixed top-16 left-0 right-0 z-40 overflow-hidden h-10 bg-white flex items-center shadow-md border-t border-b border-green-100">
       <div
-        className="animate-marquee-track flex w-max min-w-max items-center text-white font-bold text-sm md:text-base"
+        className="animate-marquee-track flex w-max min-w-max items-center text-[#006400] font-bold text-sm md:text-base"
         style={{ animationDuration: "100s" }}
       >
         {marqueeHeadlines.map((headline, idx) => (
