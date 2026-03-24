@@ -61,6 +61,19 @@ const PageTransition = ({ children, isActive }) => {
   );
 };
 
+const PageIntro = ({ kicker, title, description, align = "center" }) => {
+  const alignmentClass = align === "left" ? "text-left" : "text-center";
+  const copyClass = align === "left" ? "mx-0" : "mx-auto";
+
+  return (
+    <div className={`page-intro ${alignmentClass}`}>
+      <span className="page-intro-kicker">{kicker}</span>
+      <h1 className="page-intro-title">{title}</h1>
+      <p className={`page-intro-copy ${copyClass}`}>{description}</p>
+    </div>
+  );
+};
+
 // Loading spinner component
 const LoadingSpinner = () => (
   <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
@@ -86,24 +99,29 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full bg-[#006400] shadow-lg z-50 backdrop-blur-sm bg-opacity-95">
+    <nav className="fixed z-50 w-full border-b border-white/10 bg-[#006400]/95 shadow-[0_18px_45px_rgba(0,0,0,0.15)] backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center gap-3 group">
+        <div className="flex h-20 items-center justify-between">
+          <div className="group flex items-center gap-3">
             <img
               src="/images/SYLS-Logo.jpg.jpeg"
               alt="SYLS Logo"
-              className="h-10 w-10 object-contain rounded-md transition-transform group-hover:scale-110"
+              className="h-12 w-12 rounded-xl border border-white/15 bg-white/10 p-1 object-contain transition-transform group-hover:scale-110"
             />
-            <button
-              onClick={() => setCurrentPage("Home")}
-              className="text-2xl font-bold text-green-100 hover:text-white transition-all hover:scale-105"
-            >
-              Say Yes Learning schools
-            </button>
+            <div className="flex flex-col">
+              <span className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-green-100/80">
+                Malawi Non-Profit School
+              </span>
+              <button
+                onClick={() => setCurrentPage("Home")}
+                className="text-left text-xl font-bold text-white transition-all hover:text-green-50 sm:text-2xl"
+              >
+                Say Yes Learning Schools
+              </button>
+            </div>
           </div>
 
-          <div className="hidden md:flex space-x-1">
+          <div className="hidden md:flex items-center space-x-2 rounded-full border border-white/10 bg-white/10 px-2 py-2 shadow-inner">
             {navItems.map((item, index) => (
               <button
                 key={item}
@@ -111,10 +129,10 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
                 onClick={() => currentPage !== item && setCurrentPage(item)}
                 disabled={currentPage === item}
                 aria-current={currentPage === item ? "page" : undefined}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all transform hover:scale-105 ${
+                className={`rounded-full px-4 py-2 text-sm font-semibold tracking-wide transition-all ${
                   currentPage === item
-                    ? "bg-green-500 text-green-950 cursor-default shadow-md"
-                    : "text-green-100 hover:bg-green-700 hover:text-white hover:shadow-lg"
+                    ? "bg-white text-[#0d3819] cursor-default shadow-md"
+                    : "text-green-50/90 hover:bg-white/10 hover:text-white"
                 }`}
                 style={{ animationDelay: `${index * 50}ms` }}
               >
@@ -126,15 +144,15 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-amber-100 hover:text-white focus:outline-none transition-all hover:scale-110 p-2 rounded-md hover:bg-green-700"
+              className="rounded-full border border-white/15 bg-white/10 p-2 text-green-50 transition-all hover:scale-110 hover:bg-white/15 focus:outline-none"
             >
-              <span className="text-xl">{isOpen ? "✕" : "☰"}</span>
+              <span className="text-xl">{isOpen ? "X" : "="}</span>
             </button>
           </div>
         </div>
 
         {isOpen && (
-          <div className="md:hidden pb-3 animate-slide-in-left">
+          <div className="animate-slide-in-left pb-4 md:hidden">
             {navItems.map((item, index) => (
               <button
                 key={item}
@@ -147,10 +165,10 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
                 }}
                 disabled={currentPage === item}
                 aria-current={currentPage === item ? "page" : undefined}
-                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-all hover:scale-105 ${
+                className={`mb-2 block w-full rounded-2xl px-4 py-3 text-left text-base font-semibold transition-all ${
                   currentPage === item
-                    ? "bg-green-500 text-green-950 cursor-default"
-                    : "text-green-100 hover:bg-green-700 hover:text-white"
+                    ? "bg-white text-[#0d3819] cursor-default"
+                    : "bg-white/10 text-green-100 hover:bg-white/15 hover:text-white"
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
@@ -181,9 +199,9 @@ const FixedMarquee = () => {
   const marqueeHeadlines = [...newsHeadlines, ...newsHeadlines];
 
   return (
-    <div className="fixed top-16 left-0 right-0 z-40 overflow-hidden h-10 bg-white flex items-center shadow-md border-t border-b border-green-100">
+    <div className="fixed top-20 left-0 right-0 z-40 flex h-11 items-center overflow-hidden border-y border-green-100 bg-white/95 shadow-sm backdrop-blur-sm">
       <div
-        className="animate-marquee-track flex w-max min-w-max items-center text-[#006400] font-bold text-sm md:text-base"
+        className="animate-marquee-track flex w-max min-w-max items-center text-sm font-semibold tracking-wide text-[#006400] md:text-base"
         style={{ animationDuration: "100s" }}
       >
         {marqueeHeadlines.map((headline, idx) => (
@@ -262,180 +280,144 @@ const HomePage = ({ setCurrentPage }) => {
   };
 
   return (
-    <div className="space-y-10">
-      <section className="relative pt-10">
-        {/* Hero Slider */}
-        <div className="relative h-[56vh] min-h-[420px]">
+    <div className="space-y-14 pb-6">
+      <section className="relative pt-14">
+        <div className="relative min-h-[520px] overflow-hidden rounded-b-[2rem] sm:min-h-[620px]">
           <div
             className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
             style={{
               backgroundImage: `url(${heroSlides[currentSlide].image})`,
-              filter: "brightness(0.95) saturate(1.05)",
+              filter: "brightness(0.78) saturate(1.02)",
             }}
           />
-          <div className="absolute inset-0 bg-black/35" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#052611]/85 via-[#0c4421]/55 to-black/30" />
 
-          {/* Arrow Controls */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110 animate-pulse"
+            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/20 bg-white/10 p-3 text-white transition-all hover:scale-110 hover:bg-white/20"
             aria-label="Previous slide"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110 animate-pulse"
+            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full border border-white/20 bg-white/10 p-3 text-white transition-all hover:scale-110 hover:bg-white/20"
             aria-label="Next slide"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight animate-fade-in-up">
-              {heroSlides[currentSlide].titleSub}
-              <span className="block text-white">
-                {heroSlides[currentSlide].titleMain}
+          <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-center px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl pt-16 text-left">
+              <span className="mb-5 inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-green-100 animate-fade-in-up">
+                Quality primary education in Malawi
               </span>
-            </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl animate-fade-in-up animation-delay-200">
-              {heroSlides[currentSlide].caption}
-            </p>
-            <button
-              onClick={() => setCurrentPage("Contact")}
-              className="bg-[#006400] hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all transform hover:scale-105 hover:shadow-lg animate-fade-in-up animation-delay-400"
-            >
-              Learn More
-            </button>
-
-            <div className="mt-8 flex gap-3 animate-fade-in-up animation-delay-600">
-              {heroSlides.map((_, idx) => (
+              <h1 className="mb-5 text-4xl font-bold leading-tight text-white animate-fade-in-up sm:text-5xl md:text-6xl">
+                {heroSlides[currentSlide].titleSub}
+                <span className="block text-white">{heroSlides[currentSlide].titleMain}</span>
+              </h1>
+              <p className="mb-8 max-w-2xl text-lg leading-8 text-green-50/95 animate-fade-in-up animation-delay-200 sm:text-xl md:text-2xl">
+                {heroSlides[currentSlide].caption}
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row">
                 <button
-                  key={idx}
-                  onClick={() => setCurrentSlide(idx)}
-                  className={`h-3 w-3 rounded-full transition-all hover:scale-125 ${
-                    idx === currentSlide
-                      ? "bg-white scale-110 animate-pulse"
-                      : "bg-white/60 hover:bg-white"
-                  }`}
-                  aria-label={`Slide ${idx + 1}`}
-                />
+                  onClick={() => setCurrentPage("Contact")}
+                  className="rounded-full bg-white px-8 py-3 text-base font-semibold text-[#0b5f2c] shadow-lg transition-all hover:scale-105 hover:bg-green-50 animate-fade-in-up animation-delay-400"
+                >
+                  Learn More
+                </button>
+                <button
+                  onClick={() => setCurrentPage("About")}
+                  className="rounded-full border border-white/30 px-8 py-3 text-base font-semibold text-white transition-all hover:scale-105 hover:bg-white/10 animate-fade-in-up animation-delay-400"
+                >
+                  Our Story
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-12 grid max-w-4xl grid-cols-1 gap-4 pb-10 sm:grid-cols-3 animate-fade-in-up animation-delay-600">
+              {[
+                { title: "Evidence-Based Teaching", text: "Focused support for learners from Grade 1 to Grade 8." },
+                { title: "Safe, Inclusive Learning", text: "A values-driven environment where every child can thrive." },
+                { title: "Community Impact", text: "Building classrooms and opportunities for future leaders." },
+              ].map((item) => (
+                <div key={item.title} className="rounded-2xl border border-white/15 bg-white/10 p-5 text-white shadow-lg backdrop-blur-sm">
+                  <h3 className="mb-2 text-lg font-bold text-white">{item.title}</h3>
+                  <p className="text-sm leading-6 text-green-50/90">{item.text}</p>
+                </div>
               ))}
             </div>
+          </div>
+
+          <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 gap-3 animate-fade-in-up animation-delay-600">
+            {heroSlides.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentSlide(idx)}
+                className={`h-3 w-3 rounded-full transition-all hover:scale-125 ${idx === currentSlide ? "bg-white scale-110" : "bg-white/60 hover:bg-white"}`}
+                aria-label={`Slide ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
       </section>
 
       <AnimatedSection delay={100}>
-        <section className="mt-6 p-6 bg-[#006400] rounded-lg shadow-lg border-l-4 border-green-600 hover:shadow-2xl transition-shadow duration-300">
-          <h2 className="text-2xl font-bold text-white mb-4 text-center">
-            Our Mission
-          </h2>
-          <p className="text-green-100 text-lg leading-relaxed text-center max-w-4xl mx-auto">
-            Say Yes Learning School's mission in Malawi is to deliver quality
-            education to learners of all ages especially girls who have lagged
-            behind in education for years in Malawi ranging from grade 1-8. Say
-            Yes Learning Schools main goal is to support learners obtain
-            inquisitive search for knowledge with evidence based methods of
-            teaching.
-          </p>
+        <section className="site-shell">
+          <div className="section-panel overflow-hidden bg-[#006400] px-6 py-10 text-center sm:px-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-green-200">Our Mission</p>
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">Empowering learners through quality, values-driven schooling</h2>
+            <p className="mx-auto max-w-4xl text-lg leading-8 text-green-50/95">
+              Say Yes Learning School's mission in Malawi is to deliver quality education to learners of all ages especially girls who have lagged behind in education for years in Malawi ranging from grade 1-8. Say Yes Learning Schools main goal is to support learners obtain inquisitive search for knowledge with evidence based methods of teaching.
+            </p>
+          </div>
         </section>
       </AnimatedSection>
 
       <AnimatedSection delay={200}>
-        <section className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { number: "11", label: "Board Members" },
-                { number: "100%", label: "Commitment" },
-                { number: "∞", label: "Potential" },
-              ].map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="text-center p-6 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-all transform hover:scale-105 hover:-translate-y-1"
-                  style={{ animationDelay: `${idx * 150}ms` }}
-                >
-                  <div className="text-4xl font-bold text-[#006400] mb-2 animate-count-up">
-                    {stat.number}
-                  </div>
-                  <div className="text-gray-700">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+        <section className="site-shell">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {[
+              { number: "11", label: "Board Members", detail: "Experienced leaders supporting strategy and governance." },
+              { number: "100%", label: "Commitment", detail: "Focused on learner growth, protection, and school excellence." },
+              { number: "Infinity", label: "Potential", detail: "Helping children build brighter futures through education." },
+            ].map((stat, idx) => (
+              <div key={idx} className="grid-card p-8 text-center transition-all hover:-translate-y-1 hover:shadow-xl" style={{ animationDelay: `${idx * 150}ms` }}>
+                <div className="mb-3 text-5xl font-bold text-[#006400] animate-count-up">{stat.number}</div>
+                <div className="mb-2 text-xl font-semibold text-gray-900">{stat.label}</div>
+                <p className="text-base leading-7 text-gray-600">{stat.detail}</p>
+              </div>
+            ))}
           </div>
         </section>
       </AnimatedSection>
 
       <AnimatedSection delay={300}>
-        <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
-              Our <span className="text-[#006400]">Core Values</span>
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  icon: "🛡️",
-                  title: "Child Safety",
-                  desc: "Ensuring the protection and well-being of every child",
-                },
-                {
-                  icon: "🤝",
-                  title: "Integrity",
-                  desc: "Operating with honesty and strong moral principles",
-                },
-                {
-                  icon: "🙏",
-                  title: "Respect & Honesty",
-                  desc: "Treating others with dignity and maintaining truthfulness",
-                },
-                {
-                  icon: "🌍",
-                  title: "Diversity & Inclusiveness",
-                  desc: "Embracing all backgrounds and ensuring equal opportunities",
-                },
-              ].map((value, idx) => (
-                <div
-                  key={idx}
-                  className="p-6 bg-[#006400] rounded-lg hover:shadow-2xl transition-all transform hover:scale-105 hover:-translate-y-2 border border-green-600 group"
-                  style={{ animationDelay: `${idx * 100}ms` }}
-                >
-                  <div className="text-5xl mb-4 group-hover:animate-bounce">
-                    {value.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-green-100">{value.desc}</p>
-                </div>
-              ))}
-            </div>
+        <section className="site-shell">
+          <div className="page-intro">
+            <span className="page-intro-kicker">Core Values</span>
+            <h2 className="page-intro-title">Our <span className="text-[#006400]">Core Values</span></h2>
+            <p className="page-intro-copy">The principles guiding how we teach, lead, and care for learners.</p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { title: "Child Safety", desc: "Ensuring the protection and well-being of every child" },
+              { title: "Integrity", desc: "Operating with honesty and strong moral principles" },
+              { title: "Respect & Honesty", desc: "Treating others with dignity and maintaining truthfulness" },
+              { title: "Diversity & Inclusiveness", desc: "Embracing all backgrounds and ensuring equal opportunities" },
+            ].map((value, idx) => (
+              <div key={idx} className="overflow-hidden rounded-[1.5rem] border border-green-100 bg-white p-7 shadow-[0_24px_55px_rgba(6,42,20,0.08)] transition-all hover:-translate-y-2 hover:shadow-2xl" style={{ animationDelay: `${idx * 100}ms` }}>
+                <div className="mb-5 h-1.5 w-14 rounded-full bg-[#006400]" />
+                <h3 className="mb-3 text-xl font-bold text-gray-900">{value.title}</h3>
+                <p className="text-base leading-7 text-gray-600">{value.desc}</p>
+              </div>
+            ))}
           </div>
         </section>
       </AnimatedSection>
@@ -446,86 +428,74 @@ const HomePage = ({ setCurrentPage }) => {
 // About Page Component
 const AboutPage = ({ setCurrentPage }) => {
   return (
-    <div className="pt-20 pb-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-32 pb-20">
+      <div className="site-shell">
         <AnimatedSection>
-          <h1 className="text-5xl font-bold text-gray-900 mb-12 text-center">
-            About Say Yes Learning Schools
-          </h1>
+          <PageIntro
+            kicker="About Us"
+            title="About Say Yes Learning Schools"
+            description="A values-based non-profit school initiative focused on learner achievement, child protection, and inclusive educational growth in Malawi."
+          />
         </AnimatedSection>
 
-        <div className="space-y-12">
-          <AnimatedSection delay={100}>
-            <div>
-              <h2 className="text-3xl font-bold text-[#006400] mb-6">
-                Who We Are
-              </h2>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                Say Yes Learning schools is a Malawian non-profit that aims at
-                improving learners' education in primary school and prepare them
-                to obtain high grades with teaching methods that are evidence
-                based. We take action in promoting children's education for a
-                successful future. Say Yes Learning Schools will be built in
-                area 44, TA Tsabango. We strive to educate and protect
-                children's future.
-              </p>
-            </div>
-          </AnimatedSection>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="space-y-8">
+            <AnimatedSection delay={100}>
+              <div className="grid-card p-8 sm:p-10">
+                <h2 className="mb-5 text-3xl font-bold text-[#006400]">Who We Are</h2>
+                <p className="text-lg leading-8 text-gray-700">
+                  Say Yes Learning schools is a Malawian non-profit that aims at improving learners' education in primary school and prepare them to obtain high grades with teaching methods that are evidence based. We take action in promoting children's education for a successful future. Say Yes Learning Schools will be built in area 44, TA Tsabango. We strive to educate and protect children's future.
+                </p>
+              </div>
+            </AnimatedSection>
 
-          <AnimatedSection delay={200}>
-            <div>
-              <h2 className="text-3xl font-bold text-[#006400] mb-6">
-                Our Mission
-              </h2>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                Say Yes Learning School's mission in Malawi is to deliver
-                quality education to learners of all ages especially girls who
-                have lagged behind in education for years in Malawi ranging from
-                grade 1-8. Say Yes Learning Schools main goal is to support
-                learners obtain inquisitive search for knowledge with evidence
-                based methods of teaching.
-              </p>
-            </div>
-          </AnimatedSection>
+            <AnimatedSection delay={200}>
+              <div className="grid-card p-8 sm:p-10">
+                <h2 className="mb-5 text-3xl font-bold text-[#006400]">Our Mission</h2>
+                <p className="text-lg leading-8 text-gray-700">
+                  Say Yes Learning School's mission in Malawi is to deliver quality education to learners of all ages especially girls who have lagged behind in education for years in Malawi ranging from grade 1-8. Say Yes Learning Schools main goal is to support learners obtain inquisitive search for knowledge with evidence based methods of teaching.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
 
-          <AnimatedSection delay={300}>
-            <div>
-              <h2 className="text-3xl font-bold text-[#006400] mb-6">
-                Our Vision
-              </h2>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                Our vision at Say Yes Learning Schools in Malawi is to nurture
-                leaders of tomorrow and empower learners especially (girls) to
-                attain and retain educational knowledge.
-              </p>
-            </div>
-          </AnimatedSection>
+          <div className="space-y-8">
+            <AnimatedSection delay={300}>
+              <div className="section-panel bg-[#006400] p-8 text-white sm:p-10">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-green-200">Vision</p>
+                <h2 className="mb-5 text-3xl font-bold text-white">Our Vision</h2>
+                <p className="text-lg leading-8 text-green-50/95">
+                  Our vision at Say Yes Learning Schools in Malawi is to nurture leaders of tomorrow and empower learners especially (girls) to attain and retain educational knowledge.
+                </p>
+              </div>
+            </AnimatedSection>
 
-          <AnimatedSection delay={400}>
-            <div>
-              <h2 className="text-3xl font-bold text-[#006400] mb-6">
-                Our Values
-              </h2>
-              <ul className="text-gray-700 leading-relaxed text-lg space-y-2 stagger-children">
-                <li className="flex items-center">
-                  <span className="text-[#006400] mr-2">•</span>
-                  Child safety
-                </li>
-                <li className="flex items-center">
-                  <span className="text-[#006400] mr-2">•</span>
-                  Integrity
-                </li>
-                <li className="flex items-center">
-                  <span className="text-[#006400] mr-2">•</span>
-                  Respect and honesty
-                </li>
-                <li className="flex items-center">
-                  <span className="text-[#006400] mr-2">•</span>
-                  Diversity and inclusiveness
-                </li>
-              </ul>
-            </div>
-          </AnimatedSection>
+            <AnimatedSection delay={400}>
+              <div className="grid-card p-8 sm:p-10">
+                <h2 className="mb-5 text-3xl font-bold text-[#006400]">Our Values</h2>
+                <ul className="space-y-4 text-lg text-gray-700">
+                  {[
+                    "Child safety",
+                    "Integrity",
+                    "Respect and honesty",
+                    "Diversity and inclusiveness",
+                  ].map((value) => (
+                    <li key={value} className="flex items-start gap-3 leading-7">
+                      <span className="mt-2 h-2.5 w-2.5 rounded-full bg-[#006400]" />
+                      <span>{value}</span>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage("Contact")}
+                  className="mt-8 rounded-full bg-[#006400] px-6 py-3 text-sm font-semibold text-white transition hover:bg-green-700"
+                >
+                  Contact the School Team
+                </button>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </div>
     </div>
@@ -536,14 +506,14 @@ const AboutPage = ({ setCurrentPage }) => {
 const ProgramsPage = () => {
   const programs = [
     {
-      icon: "📚",
+      icon: "Academic",
       title: "Academic Excellence",
       description:
         "Rigorous curriculum designed to foster critical thinking and lifelong learning",
       highlights: ["Mathematics", "Sciences", "Languages", "Social Studies"],
     },
     {
-      icon: "🎯",
+      icon: "Sports",
       title: "Sports & Recreation",
       description:
         "Comprehensive athletic programs promoting physical fitness and teamwork",
@@ -555,14 +525,14 @@ const ProgramsPage = () => {
       ],
     },
     {
-      icon: "🎨",
+      icon: "Arts",
       title: "Arts & Culture",
       description:
         "Creative programs encouraging artistic expression and cultural awareness",
       highlights: ["Music", "Visual Arts", "Drama", "Cultural Events"],
     },
     {
-      icon: "🌱",
+      icon: "Skills",
       title: "Life Skills",
       description:
         "Development programs for character building and personal growth",
@@ -571,33 +541,37 @@ const ProgramsPage = () => {
   ];
 
   return (
-    <div className="pt-20 pb-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">Our Programs</h1>
-        <p className="text-xl text-gray-700 mb-12">
-          Comprehensive educational programs for holistic development
-        </p>
+    <div className="pt-32 pb-20">
+      <div className="site-shell">
+        <PageIntro
+          kicker="Programs"
+          title="Our Programs"
+          description="Comprehensive educational programs designed to support academic growth, creativity, character formation, and learner wellbeing."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {programs.map((program, idx) => (
             <div
               key={idx}
-              className="p-8 bg-[#006400] rounded-lg border border-green-600 hover:shadow-xl transition-all"
+              className="section-panel p-8 sm:p-10 transition-all hover:-translate-y-1 hover:shadow-2xl"
             >
-              <div className="text-5xl mb-4">{program.icon}</div>
-              <h3 className="text-2xl font-bold text-white mb-2">
-                {program.title}
-              </h3>
-              <p className="text-green-100 mb-4">{program.description}</p>
-              <div className="space-y-2">
-                <h4 className="font-bold text-green-200">Key Areas:</h4>
-                <div className="grid grid-cols-2 gap-2">
+              <div className="mb-6 flex items-center justify-between gap-4">
+                <div>
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#006400]">{program.icon}</p>
+                  <h3 className="text-2xl font-bold text-gray-900">{program.title}</h3>
+                </div>
+                <div className="h-12 w-12 rounded-2xl bg-green-50" />
+              </div>
+              <p className="mb-6 text-lg leading-8 text-gray-700">{program.description}</p>
+              <div>
+                <h4 className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#006400]">Key Areas</h4>
+                <div className="grid grid-cols-2 gap-3">
                   {program.highlights.map((highlight, hidx) => (
                     <div
                       key={hidx}
-                      className="text-green-200 text-sm flex items-center"
+                      className="rounded-2xl border border-green-100 bg-green-50/70 px-4 py-3 text-sm font-semibold text-[#0d3819]"
                     >
-                      <span className="text-white mr-2">•</span> {highlight}
+                      {highlight}
                     </div>
                   ))}
                 </div>
@@ -693,58 +667,56 @@ const TeamPage = () => {
   ];
 
   return (
-    <div className="pt-20 pb-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="pt-32 pb-20">
+      <div className="site-shell">
         <AnimatedSection>
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            Board Members
-          </h1>
-          <p className="text-xl text-gray-700 mb-12">
-            Dedicated leaders guiding Say Yes Learning Schools
-          </p>
+          <PageIntro
+            kicker="Leadership"
+            title="Board Members"
+            description="Dedicated leaders guiding Say Yes Learning Schools with expertise in education, governance, community development, and learner wellbeing."
+          />
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
           {boardMembers.map((member, idx) => (
             <AnimatedSection
               key={idx}
               delay={idx * 100}
-              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all duration-300 bg-white shadow-md hover:shadow-xl hover-lift flex flex-col"
+              className="group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-green-100 bg-white shadow-[0_22px_55px_rgba(6,42,20,0.08)] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="w-full h-48 flex-shrink-0 overflow-hidden bg-[#006400]">
+              <div className="h-56 w-full flex-shrink-0 overflow-hidden bg-[#006400]">
                 <img
                   src={member.photo}
                   alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
                     e.target.src =
-                      'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23006400" width="200" height="200"/%3E%3Ctext x="50%%" y="50%%" fill="%23fff" font-size="12" text-anchor="middle" dy=".3em"%3EPhoto unavailable%3C/text%3E%3C/svg%3E';
+                      'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23006400" width="200" height="200"/%3E%3Ctext x="50%25" y="50%25" fill="%23fff" font-size="12" text-anchor="middle" dy=".3em"%3EPhoto unavailable%3C/text%3E%3C/svg%3E';
                   }}
                 />
               </div>
-              <div className="flex-1 p-6 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover:text-[#006400] transition-colors">
-                    {member.name}
-                  </h3>
-                  <p className="text-[#006400] font-semibold mb-3 group-hover:scale-105 transition-transform">
-                    {member.role}
-                  </p>
-                  <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
-                    {member.description}
-                  </p>
-                </div>
+              <div className="flex-1 p-6">
+                <div className="mb-3 h-1.5 w-12 rounded-full bg-[#006400]" />
+                <h3 className="mb-1 text-xl font-bold text-gray-900 transition-colors group-hover:text-[#006400]">
+                  {member.name}
+                </h3>
+                <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[#006400]">
+                  {member.role}
+                </p>
+                <p className="text-sm leading-7 text-gray-700 whitespace-pre-wrap">
+                  {member.description}
+                </p>
               </div>
             </AnimatedSection>
           ))}
         </div>
 
         <AnimatedSection delay={400}>
-          <div className="mt-16 p-8 bg-[#006400] rounded-lg border border-green-600 hover:shadow-2xl transition-shadow duration-300">
-            <h2 className="text-2xl font-bold text-white mb-4">
+          <div className="mt-16 section-panel bg-[#006400] p-8 text-white sm:p-10">
+            <h2 className="mb-4 text-3xl font-bold text-white">
               Leadership & Governance
             </h2>
-            <p className="text-green-100 mb-4">
+            <p className="text-lg leading-8 text-green-50/95">
               Our board members are committed to providing strategic oversight
               and ensuring that Say Yes Learning Schools maintains the highest
               standards of educational excellence and institutional integrity.
@@ -759,21 +731,22 @@ const TeamPage = () => {
 // Gallery Page Component
 const GalleryPage = () => {
   return (
-    <div className="pt-20 pb-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">Gallery</h1>
-        <p className="text-xl text-gray-700 mb-12">
-          Capturing moments of excellence and growth
-        </p>
+    <div className="pt-32 pb-20">
+      <div className="site-shell">
+        <PageIntro
+          kicker="Gallery"
+          title="School Gallery"
+          description="Capturing moments of excellence, community, and growth across the life of the school."
+        />
 
-        <div className="p-12 bg-blue-50 rounded-lg border border-blue-300 text-center">
-          <div className="text-5xl mb-4">🎨</div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-3">Coming Soon</h3>
-          <p className="text-gray-700 text-lg leading-relaxed max-w-2xl mx-auto">
+        <div className="section-panel mx-auto max-w-4xl p-12 text-center">
+          <div className="mx-auto mb-6 h-16 w-16 rounded-[1.5rem] bg-green-50" />
+          <h3 className="mb-3 text-3xl font-bold text-gray-900">Coming Soon</h3>
+          <p className="mx-auto max-w-2xl text-lg leading-8 text-gray-700">
             Our photo gallery is not available at this moment. We are working on
             showcasing memorable moments from our school events, academic
             activities, sports programs, and cultural celebrations. Check back
-            later for updates!
+            later for updates.
           </p>
         </div>
       </div>
@@ -801,7 +774,12 @@ const ContactPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, subject, message } = formData;
-    const whatsappMessage = `Hello, my name is ${name}.\nEmail: ${email}\n\nSubject: ${subject}\n\nMessage: ${message}`;
+    const whatsappMessage = `Hello, my name is ${name}.
+Email: ${email}
+
+Subject: ${subject}
+
+Message: ${message}`;
     const encodedMessage = encodeURIComponent(whatsappMessage);
     window.open(
       `https://wa.me/${whatsappNumber}?text=${encodedMessage}`,
@@ -811,243 +789,120 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="pt-20 pb-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">Contact Us</h1>
-        <p className="text-xl text-gray-700 mb-12">
-          Get in touch with Say Yes Learning Schools
-        </p>
+    <div className="pt-32 pb-20">
+      <div className="site-shell">
+        <PageIntro
+          kicker="Contact"
+          title="Contact Us"
+          description="Get in touch with Say Yes Learning Schools to learn more, partner with us, or support the future of education in Malawi."
+        />
 
-        {/* Donation Section */}
         <div
           id="donate"
-          className="mb-16 p-8 bg-green-50 rounded-lg border border-green-300"
+          className="section-panel mb-16 overflow-hidden bg-green-50/80 p-8 sm:p-10"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
-            💚 Get Involved - Make a Donation
-          </h2>
-          <p className="text-gray-700 mb-6 leading-relaxed">
-            Learn how you can donate to make a difference in children's
-            education in Malawi, especially girls. Please consider making a
-            donation and help Say Yes Learning Schools build classrooms. Your
-            help will ensure and brighten the children's education,
-            simultaneously making our world a better place for all.
-          </p>
+          <div className="mb-8 max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#006400]">Get Involved</p>
+            <h2 className="mb-4 text-3xl font-bold text-gray-900">Make a Donation</h2>
+            <p className="text-lg leading-8 text-gray-700">
+              Learn how you can donate to make a difference in children's education in Malawi, especially girls. Please consider making a donation and help Say Yes Learning Schools build classrooms. Your help will ensure and brighten the children's education, simultaneously making our world a better place for all.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-6 bg-white rounded-lg border border-green-200">
-              <h3 className="text-xl font-bold text-[#006400] mb-4">
-                🌍 International Donation
-              </h3>
-              <p className="text-gray-700 font-semibold mb-3">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <div className="grid-card p-6 sm:p-8">
+              <h3 className="mb-4 text-2xl font-bold text-[#006400]">International Donation</h3>
+              <p className="mb-4 text-gray-700 font-semibold">
                 To donate internationally use:{" "}
-                <a
-                  href="https://www.unfcu.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://www.unfcu.org" target="_blank" rel="noopener noreferrer" className="text-[#006400] underline underline-offset-4">
                   www.unfcu.org
                 </a>
               </p>
-              <div className="space-y-2 text-gray-700 text-sm">
-                <p>
-                  <strong>Lizzie T Dube</strong>
-                </p>
-                <p>
-                  <strong>Member Number:</strong> 8147202
-                </p>
-                <p>
-                  <strong>Checking Account:</strong> 20007843005
-                </p>
-                <p>
-                  <strong>P.O. Box:</strong> 30230, Lilongwe, Malawi
-                </p>
+              <div className="space-y-2 text-sm leading-7 text-gray-700">
+                <p><strong>Lizzie T Dube</strong></p>
+                <p><strong>Member Number:</strong> 8147202</p>
+                <p><strong>Checking Account:</strong> 20007843005</p>
+                <p><strong>P.O. Box:</strong> 30230, Lilongwe, Malawi</p>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm space-y-2">
-                <p>
-                  <strong>ABA/Bank Routing Number:</strong> 226078609
-                </p>
-                <p>
-                  <strong>United Nations Federal Credit Union, NY</strong>
-                </p>
-                <p>
-                  <strong>Bank Address:</strong>
-                </p>
-                <p>
-                  2 United Nations Plaza, New York
-                  <br />
-                  NY 10017, USA
-                </p>
+              <div className="mt-4 border-t border-gray-200 pt-4 space-y-2 text-sm leading-7 text-gray-700">
+                <p><strong>ABA/Bank Routing Number:</strong> 226078609</p>
+                <p><strong>United Nations Federal Credit Union, NY</strong></p>
+                <p><strong>Bank Address:</strong></p>
+                <p>2 United Nations Plaza, New York<br />NY 10017, USA</p>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-200 text-gray-700 text-sm space-y-1">
-                <p>
-                  <strong>Phone:</strong> 265885871388 / 265997544244
-                </p>
-                <p>
-                  <strong>Email:</strong> lizzie.dube@yahoo.com
-                </p>
+              <div className="mt-4 border-t border-gray-200 pt-4 space-y-1 text-sm leading-7 text-gray-700">
+                <p><strong>Phone:</strong> 265885871388 / 265997544244</p>
+                <p><strong>Email:</strong> lizzie.dube@yahoo.com</p>
               </div>
             </div>
 
-            <div className="p-6 bg-white rounded-lg border border-green-200">
-              <h3 className="text-xl font-bold text-[#006400] mb-4">
-                Local Donation (Malawi)
-              </h3>
-              <p className="text-gray-700 font-semibold mb-3">
-                To donate locally use:
-              </p>
-              <div className="space-y-2 text-gray-700 text-sm">
-                <p>
-                  <strong>National Bank of Malawi</strong>
-                </p>
-                <p>
-                  <strong>Say Yes Learning Schools</strong>
-                </p>
-                <p>
-                  <strong>Account Number:</strong> 1012897517
-                </p>
-                <p>
-                  <strong>Swiftcode:</strong> NBMAMWMW002
-                </p>
+            <div className="grid-card p-6 sm:p-8">
+              <h3 className="mb-4 text-2xl font-bold text-[#006400]">Local Donation (Malawi)</h3>
+              <p className="mb-3 text-gray-700 font-semibold">To donate locally use:</p>
+              <div className="space-y-2 text-sm leading-7 text-gray-700">
+                <p><strong>National Bank of Malawi</strong></p>
+                <p><strong>Say Yes Learning Schools</strong></p>
+                <p><strong>Account Number:</strong> 1012897517</p>
+                <p><strong>Swiftcode:</strong> NBMAMWMW002</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Contact Form */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
-            Send Us a Message
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                    placeholder="Message subject"
-                  />
-                </div>
-                <div>
-                  <label className="block text-gray-700 font-semibold mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows="5"
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:border-[#006400]"
-                    placeholder="Your message here..."
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-[#006400] hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105"
-                >
-                  Send Message
-                </button>
-              </form>
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="section-panel p-8 sm:p-10">
+            <h2 className="mb-8 text-3xl font-bold text-gray-900">Send Us a Message</h2>
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-gray-700">Name</label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange} required className="field-control w-full px-4 py-3 text-gray-900 placeholder-gray-500" placeholder="Your name" />
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-gray-700">Email</label>
+                <input type="email" name="email" value={formData.email} onChange={handleChange} required className="field-control w-full px-4 py-3 text-gray-900 placeholder-gray-500" placeholder="your@email.com" />
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-gray-700">Subject</label>
+                <input type="text" name="subject" value={formData.subject} onChange={handleChange} required className="field-control w-full px-4 py-3 text-gray-900 placeholder-gray-500" placeholder="Message subject" />
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-gray-700">Message</label>
+                <textarea name="message" value={formData.message} onChange={handleChange} required rows="5" className="field-control w-full px-4 py-3 text-gray-900 placeholder-gray-500" placeholder="Your message here..."></textarea>
+              </div>
+              <button type="submit" className="w-full rounded-full bg-[#006400] px-6 py-3 text-base font-semibold text-white transition-all hover:scale-[1.01] hover:bg-green-700">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          <div className="space-y-6">
+            <div className="section-panel bg-[#006400] p-6 text-white">
+              <h3 className="mb-3 text-2xl font-bold text-white">Location</h3>
+              <p className="text-lg text-green-100">Say Yes Learning Schools</p>
+              <p className="text-green-100">Malawi</p>
             </div>
 
-            <div className="space-y-6">
-              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-                <h3 className="text-xl font-bold text-white mb-3">
-                  📍 Location
-                </h3>
-                <p className="text-green-100">Say Yes Learning Schools</p>
-                <p className="text-green-100">Malawi</p>
-              </div>
+            <div className="grid-card p-6">
+              <h3 className="mb-3 text-2xl font-bold text-gray-900">Contact Information</h3>
+              <p className="mb-2 text-gray-700">lizzie.dube@yahoo.com</p>
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#006400] underline underline-offset-4">
+                WhatsApp: +265885871388
+              </a>
+            </div>
 
-              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-                <h3 className="text-xl font-bold text-white mb-3">
-                  📞 Contact Information
-                </h3>
-                <p className="text-green-100 mb-2">lizzie.dube@yahoo.com</p>
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-green-100 hover:text-white underline underline-offset-4"
-                >
-                  WhatsApp: +265885871388
-                </a>
-              </div>
+            <div className="grid-card p-6">
+              <h3 className="mb-3 text-2xl font-bold text-gray-900">Office Hours</h3>
+              <p className="text-gray-700">Monday - Friday</p>
+              <p className="text-gray-700">7:30 AM - 4:00 PM</p>
+            </div>
 
-              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-                <h3 className="text-xl font-bold text-white mb-3">
-                  🕐 Office Hours
-                </h3>
-                <p className="text-green-100">Monday - Friday</p>
-                <p className="text-green-100">7:30 AM - 4:00 PM</p>
-              </div>
-
-              <div className="p-6 bg-[#006400] rounded-lg border border-green-600">
-                <h3 className="text-xl font-bold text-white mb-3">
-                  🔗 Connect With Us
-                </h3>
-                <div className="flex space-x-3">
-                  <button
-                    type="button"
-                    className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition"
-                  >
-                    f
-                  </button>
-                  <button
-                    type="button"
-                    className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center font-bold transition"
-                  >
-                    in
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      window.location.href = whatsappLink;
-                    }}
-                    aria-label="Open WhatsApp"
-                    className="w-10 h-10 bg-green-600 hover:bg-green-700 text-white rounded-full flex items-center justify-center transition"
-                  >
-                    <WhatsAppIcon />
-                  </button>
-                </div>
-              </div>
+            <div className="section-panel bg-[#0f3f1e] p-6 text-white">
+              <h3 className="mb-3 text-2xl font-bold text-white">Connect With Us</h3>
+              <p className="mb-4 text-green-100">Reach out directly for partnership, enrolment, and support conversations.</p>
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                <WhatsAppIcon className="h-4 w-4" />
+                Chat on WhatsApp
+              </a>
             </div>
           </div>
         </div>
@@ -1221,7 +1076,7 @@ export default function App() {
     <>
       {!isLoaded && <LoadingSpinner />}
       <div
-        className={`bg-white min-h-screen text-gray-900 transition-opacity duration-1000 ${
+        className={`min-h-screen text-gray-900 transition-opacity duration-1000 ${
           isLoaded ? "opacity-100" : "opacity-0"
         }`}
       >
@@ -1230,7 +1085,7 @@ export default function App() {
           setCurrentPage={handlePageChange}
         />
         <FixedMarquee />
-        <main className="pt-10">
+        <main className="pt-14">
           <PageTransition isActive={!isTransitioning}>
             {renderPage()}
           </PageTransition>
