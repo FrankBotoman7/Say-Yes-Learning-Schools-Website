@@ -281,10 +281,13 @@ const HomePage = ({ setCurrentPage }) => {
         <h2 className="text-2xl font-bold text-white mb-4 text-center">
           Our Mission
         </h2>
-        <p className="text-green-100 text-lg leading-relaxed text-center max-w-3xl mx-auto">
-          To provide comprehensive, quality education that empowers students to
-          become leaders, innovators, and responsible citizens who contribute
-          positively to society.
+        <p className="text-green-100 text-lg leading-relaxed text-center max-w-4xl mx-auto">
+          Say Yes Learning School's mission in Malawi is to deliver quality
+          education to learners of all ages especially girls who have lagged
+          behind in education for years in Malawi ranging from grade 1-8. Say
+          Yes Learning Schools main goal is to support learners obtain
+          inquisitive search for knowledge with evidence based methods of
+          teaching.
         </p>
       </section>
 
