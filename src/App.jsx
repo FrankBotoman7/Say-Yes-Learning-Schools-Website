@@ -365,117 +365,57 @@ const AboutPage = ({ setCurrentPage }) => {
           About Say Yes Learning Schools
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+        <div className="space-y-12">
           <div>
-            <h2 className="text-2xl font-bold text-[#006400] mb-4">
+            <h2 className="text-3xl font-bold text-[#006400] mb-6">
               Who We Are
             </h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              Say Yes Learning Schools is a premier educational institution
-              dedicated to nurturing intellectual growth, character development,
-              and holistic learning for our students. Our commitment is to
-              create an environment where every student can thrive and reach
-              their full potential.
-            </p>
-            <h2 className="text-2xl font-bold text-[#006400] mb-4">
-              Our Vision
-            </h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
-              To be recognized as a leading institution that produces
-              well-rounded graduates equipped with academic excellence, strong
-              values, and the ability to make meaningful contributions to
-              society.
+            <p className="text-gray-700 leading-relaxed text-lg">
+              Say Yes Learning schools is a Malawian non-profit that aims at
+              improving learners' education in primary school and prepare them
+              to obtain high grades with teaching methods that are evidence
+              based. We take action in promoting children's education for a
+              successful future. Say Yes Learning Schools will be built in area
+              44, TA Tsabango. We strive to educate and protect children's
+              future.
             </p>
           </div>
 
           <div>
-            <h2 className="text-2xl font-bold text-[#006400] mb-4">
-              Why Choose SYLS?
+            <h2 className="text-3xl font-bold text-[#006400] mb-6">
+              Our Mission
             </h2>
-            <div className="space-y-3">
-              {[
-                "Experienced and dedicated faculty members",
-                "Comprehensive curriculum with practical learning",
-                "State-of-the-art facilities and resources",
-                "Emphasis on character and leadership development",
-                "Strong community and parental involvement",
-                "Proven track record of student excellence",
-                "Safe and nurturing learning environment",
-                "Holistic approach to education",
-              ].map((reason, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-start p-3 bg-[#006400] rounded-lg border border-green-600"
-                >
-                  <span className="text-white mr-3 text-lg">✓</span>
-                  <span className="text-white">{reason}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
-          <div className="p-8 bg-[#006400] rounded-lg border border-green-600">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              📍 Where We Work
-            </h2>
-            <p className="text-green-100 leading-relaxed">
-              Classes will start in September 2026 in Area 23 at a rental place
-              while we wait to build a structure of Say Yes Learning Schools in
-              the near future pending availability of funding at a place already
-              bought.
+            <p className="text-gray-700 leading-relaxed text-lg">
+              Say Yes Learning School's mission in Malawi is to deliver quality
+              education to learners of all ages especially girls who have lagged
+              behind in education for years in Malawi ranging from grade 1-8.
+              Say Yes Learning Schools main goal is to support learners obtain
+              inquisitive search for knowledge with evidence based methods of
+              teaching.
             </p>
           </div>
 
-          <div className="p-8 bg-[#006400] rounded-lg border border-green-600">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              🚀 Current Activities
+          <div>
+            <h2 className="text-3xl font-bold text-[#006400] mb-6">
+              Our Vision
             </h2>
-            <p className="text-green-100 leading-relaxed">
-              Right now, Say Yes Learning Schools in Malawi is in the middle of
-              sourcing funds to build a school structure of its own in Lilongwe,
-              Malawi.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="p-8 bg-blue-50 rounded-lg border border-blue-300">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              ✨ News and Stories
-            </h2>
-            <p className="text-gray-700 leading-relaxed">
-              The Executive Director has spoken to several families that want
-              their children to be placed in Say Yes Learning Schools. This is
-              exciting and a nice start! We are grateful for the community's
-              trust and look forward to welcoming our first students.
+            <p className="text-gray-700 leading-relaxed text-lg">
+              Our vision at Say Yes Learning Schools in Malawi is to nurture
+              leaders of tomorrow and empower learners especially (girls) to
+              attain and retain educational knowledge.
             </p>
           </div>
 
-          <div className="p-8 bg-green-50 rounded-lg border border-green-300">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              🤝 Get Involved
+          <div>
+            <h2 className="text-3xl font-bold text-[#006400] mb-6">
+              Our Values
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              Learn how you can donate to make a difference in children's
-              education in Malawi, especially for girls. Your donation will help
-              Say Yes Learning Schools build classrooms and brighten children's
-              education.
-            </p>
-            <a
-              onClick={() => {
-                setCurrentPage("Contact");
-                setTimeout(() => {
-                  document
-                    .getElementById("donate")
-                    ?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
-              }}
-              className="text-[#006400] font-semibold hover:underline cursor-pointer"
-            >
-              View Donation Options →
-            </a>
+            <ul className="text-gray-700 leading-relaxed text-lg space-y-2">
+              <li>• Child safety</li>
+              <li>• Integrity</li>
+              <li>• Respect and honesty</li>
+              <li>• Diversity and inclusiveness</li>
+            </ul>
           </div>
         </div>
       </div>
