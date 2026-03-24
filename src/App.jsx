@@ -943,21 +943,21 @@ const ContactPage = () => {
 // Footer Component
 const Footer = ({ currentPage, setCurrentPage }) => {
   return (
-    <footer className="bg-green-900 border-t border-green-800 mt-20">
+    <footer className="bg-green-900 border-t border-white mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-lg font-bold text-yellow-300 mb-4">
+            <h3 className="text-lg font-bold text-white mb-4">
               Say Yes Learning schools
             </h3>
-            <p className="text-green-200">
+            <p className="text-white">
               Empowering students through quality education and holistic
               development.
             </p>
           </div>
           <div>
             <h4 className="font-bold text-white mb-4">Navigation</h4>
-            <ul className="space-y-2 text-amber-200 text-sm">
+            <ul className="space-y-2 text-white text-sm">
               {navItems
                 .filter((item) => item !== currentPage)
                 .map((item) => (
@@ -965,7 +965,7 @@ const Footer = ({ currentPage, setCurrentPage }) => {
                     <button
                       type="button"
                       onClick={() => setCurrentPage(item)}
-                      className="text-sm text-amber-200 hover:text-yellow-300 transition"
+                      className="text-sm text-white hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
                     >
                       {item}
                     </button>
@@ -975,19 +975,28 @@ const Footer = ({ currentPage, setCurrentPage }) => {
           </div>
           <div>
             <h4 className="font-bold text-white mb-4">Resources</h4>
-            <ul className="space-y-2 text-amber-200 text-sm">
+            <ul className="space-y-2 text-white text-sm">
               <li>
-                <a href="#" className="hover:text-yellow-300">
+                <a
+                  href="#"
+                  className="hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
+                >
                   Student Portal
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-300">
+                <a
+                  href="#"
+                  className="hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
+                >
                   Parent Resources
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-yellow-300">
+                <a
+                  href="#"
+                  className="hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
+                >
                   Academic Calendar
                 </a>
               </li>
@@ -995,12 +1004,12 @@ const Footer = ({ currentPage, setCurrentPage }) => {
           </div>
           <div>
             <h4 className="font-bold text-white mb-4">Information</h4>
-            <p className="text-amber-200 text-sm">Malawi</p>
-            <p className="text-amber-200 text-sm">lizzie.dube@yahoo.com</p>
-            <p className="text-amber-200 text-sm">+265885871388</p>
+            <p className="text-white text-sm">Malawi</p>
+            <p className="text-white text-sm">lizzie.dube@yahoo.com</p>
+            <p className="text-white text-sm">+265885871388</p>
           </div>
         </div>
-        <div className="border-t border-amber-800 pt-8 text-center text-amber-300">
+        <div className="border-t border-white pt-8 text-center text-white">
           <p>&copy; 2026 Say Yes Learning Schools. All rights reserved.</p>
         </div>
       </div>
