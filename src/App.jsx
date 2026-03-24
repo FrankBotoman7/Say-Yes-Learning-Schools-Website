@@ -1058,46 +1058,115 @@ const ContactPage = () => {
 
 // Footer Component
 const Footer = ({ currentPage, setCurrentPage }) => {
+  const whatsappLink = "https://wa.me/265885871388";
+  const footerLinks = navItems.filter((item) => item !== currentPage);
+
   return (
-    <footer className="bg-green-900 border-t border-white mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="text-lg font-bold text-white mb-4">
-              Say Yes Learning schools
-            </h3>
-            <p className="text-white">
-              Empowering students through quality education and holistic
-              development.
+    <footer className="mt-20 border-t border-green-800 bg-gradient-to-br from-[#032d12] via-[#06451e] to-[#0b5f2c] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="mb-10 grid grid-cols-1 gap-8 border-b border-white/15 pb-10 lg:grid-cols-[1.5fr_1fr_1fr_1.1fr]">
+          <div className="max-w-md">
+            <div className="mb-5 flex items-center gap-3">
+              <img
+                src="/images/SYLS-Logo.jpg.jpeg"
+                alt="Say Yes Learning Schools logo"
+                className="h-12 w-12 rounded-xl border border-white/15 object-contain bg-white/10 p-1"
+              />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.3em] text-green-200">
+                  Say Yes Learning Schools
+                </p>
+                <h3 className="text-2xl font-bold text-white">
+                  Building brighter futures through education
+                </h3>
+              </div>
+            </div>
+            <p className="text-sm leading-7 text-green-50/85">
+              We are a Malawian non-profit committed to quality primary
+              education, learner protection, and long-term community impact
+              through inclusive and values-driven schooling.
             </p>
           </div>
+
           <div>
-            <h4 className="font-bold text-white mb-4">Navigation</h4>
-            <ul className="space-y-2 text-white text-sm">
-              {navItems
-                .filter((item) => item !== currentPage)
-                .map((item) => (
-                  <li key={item}>
-                    <button
-                      type="button"
-                      onClick={() => setCurrentPage(item)}
-                      className="text-sm text-white hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
-                    >
-                      {item}
-                    </button>
-                  </li>
-                ))}
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-green-200">
+              Explore
+            </h4>
+            <ul className="space-y-3 text-sm text-green-50/90">
+              {footerLinks.map((item) => (
+                <li key={item}>
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage(item)}
+                    className="group inline-flex items-center gap-2 transition hover:text-white"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-green-300 transition group-hover:scale-125" />
+                    {item}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
+
           <div>
-            <h4 className="font-bold text-white mb-4">Information</h4>
-            <p className="text-white text-sm">Malawi</p>
-            <p className="text-white text-sm">lizzie.dube@yahoo.com</p>
-            <p className="text-white text-sm">+265885871388</p>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-green-200">
+              Contact
+            </h4>
+            <div className="space-y-3 text-sm text-green-50/90">
+              <p>Area 44, TA Tsabango, Lilongwe, Malawi</p>
+              <a
+                href="mailto:lizzie.dube@yahoo.com"
+                className="block transition hover:text-white"
+              >
+                lizzie.dube@yahoo.com
+              </a>
+              <a
+                href="tel:+265885871388"
+                className="block transition hover:text-white"
+              >
+                +265 885 871 388
+              </a>
+              <p>Monday - Friday, 7:30 AM - 4:00 PM</p>
+            </div>
+          </div>
+
+          <div>
+            <div className="rounded-2xl border border-white/15 bg-white/10 p-5 shadow-lg shadow-black/10 backdrop-blur-sm">
+              <h4 className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-green-200">
+                Partner With Us
+              </h4>
+              <p className="mb-5 text-sm leading-7 text-green-50/90">
+                Support school development, learner wellbeing, and access to
+                quality education for children in Malawi.
+              </p>
+              <button
+                type="button"
+                onClick={() => setCurrentPage("Contact")}
+                className="w-full rounded-full bg-white px-4 py-3 text-sm font-semibold text-[#0b5f2c] transition hover:bg-green-100"
+              >
+                Donate or Get Involved
+              </button>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                Chat on WhatsApp
+              </a>
+            </div>
           </div>
         </div>
-        <div className="border-t border-white pt-8 text-center text-white">
-          <p>&copy; 2026 Say Yes Learning Schools. All rights reserved.</p>
+
+        <div className="flex flex-col gap-4 text-sm text-green-50/80 md:flex-row md:items-center md:justify-between">
+          <p>
+            &copy; {new Date().getFullYear()} Say Yes Learning Schools. All
+            rights reserved.
+          </p>
+          <p>
+            Educating with integrity, inclusion, and care for every learner.
+          </p>
         </div>
       </div>
     </footer>
