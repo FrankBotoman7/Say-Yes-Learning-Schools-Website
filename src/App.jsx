@@ -1090,35 +1090,6 @@ const Footer = ({ currentPage, setCurrentPage }) => {
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-white mb-4">Resources</h4>
-            <ul className="space-y-2 text-white text-sm">
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
-                >
-                  Student Portal
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
-                >
-                  Parent Resources
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-white hover:scale-x-110 transition-transform duration-200 inline-block"
-                >
-                  Academic Calendar
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
             <h4 className="font-bold text-white mb-4">Information</h4>
             <p className="text-white text-sm">Malawi</p>
             <p className="text-white text-sm">lizzie.dube@yahoo.com</p>
