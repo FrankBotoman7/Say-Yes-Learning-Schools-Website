@@ -651,13 +651,13 @@ const TeamPage = () => {
           Dedicated leaders guiding Say Yes Learning Schools
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {boardMembers.map((member, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all bg-white shadow-md hover:shadow-lg flex flex-col md:flex-row"
+              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all bg-white shadow-md hover:shadow-lg flex flex-col"
             >
-              <div className="w-full md:w-48 h-48 flex-shrink-0 overflow-hidden bg-[#006400]">
+              <div className="w-full h-48 flex-shrink-0 overflow-hidden bg-[#006400]">
                 <img
                   src={member.photo}
                   alt={member.name}
