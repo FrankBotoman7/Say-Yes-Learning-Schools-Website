@@ -318,24 +318,24 @@ const HomePage = ({ setCurrentPage }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: "🎓",
-                title: "Excellence",
-                desc: "Providing outstanding education",
+                icon: "🛡️",
+                title: "Child Safety",
+                desc: "Ensuring the protection and well-being of every child",
               },
               {
                 icon: "🤝",
                 title: "Integrity",
-                desc: "Operating with honesty",
+                desc: "Operating with honesty and strong moral principles",
               },
               {
-                icon: "🌟",
-                title: "Innovation",
-                desc: "Embracing modern approaches",
+                icon: "🙏",
+                title: "Respect & Honesty",
+                desc: "Treating others with dignity and maintaining truthfulness",
               },
               {
-                icon: "❤️",
-                title: "Compassion",
-                desc: "Caring for every student",
+                icon: "🌍",
+                title: "Diversity & Inclusiveness",
+                desc: "Embracing all backgrounds and ensuring equal opportunities",
               },
             ].map((value, idx) => (
               <div
