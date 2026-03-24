@@ -369,10 +369,14 @@ const HomePage = ({ setCurrentPage }) => {
 
       <AnimatedSection delay={100}>
         <section className="site-shell">
-          <div className="section-panel overflow-hidden bg-[#006400] px-6 py-10 text-center sm:px-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-green-200">Our Mission</p>
-            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">Empowering learners through quality, values-driven schooling</h2>
-            <p className="mx-auto max-w-4xl text-lg leading-8 text-green-50/95">
+          <div className="overflow-hidden rounded-[1.75rem] border border-green-800 bg-gradient-to-br from-[#004d1f] via-[#006400] to-[#0a7a31] px-6 py-10 text-center shadow-[0_28px_60px_rgba(0,57,20,0.28)] sm:px-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-green-100">
+              Our Mission
+            </p>
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+              Empowering learners through quality, values-driven schooling
+            </h2>
+            <p className="mx-auto max-w-4xl text-lg leading-8 text-white">
               Say Yes Learning School's mission in Malawi is to deliver quality education to learners of all ages especially girls who have lagged behind in education for years in Malawi ranging from grade 1-8. Say Yes Learning Schools main goal is to support learners obtain inquisitive search for knowledge with evidence based methods of teaching.
             </p>
           </div>
@@ -461,10 +465,14 @@ const AboutPage = ({ setCurrentPage }) => {
 
           <div className="space-y-8">
             <AnimatedSection delay={300}>
-              <div className="section-panel bg-[#006400] p-8 text-white sm:p-10">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-green-200">Vision</p>
-                <h2 className="mb-5 text-3xl font-bold text-white">Our Vision</h2>
-                <p className="text-lg leading-8 text-green-50/95">
+              <div className="grid-card p-8 sm:p-10">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#006400]">
+                  Vision
+                </p>
+                <h2 className="mb-5 text-3xl font-bold text-[#006400]">
+                  Our Vision
+                </h2>
+                <p className="text-lg leading-8 text-gray-700">
                   Our vision at Say Yes Learning Schools in Malawi is to nurture leaders of tomorrow and empower learners especially (girls) to attain and retain educational knowledge.
                 </p>
               </div>
@@ -876,10 +884,10 @@ Message: ${message}`;
           </div>
 
           <div className="space-y-6">
-            <div className="section-panel bg-[#006400] p-6 text-white">
+            <div className="overflow-hidden rounded-[1.5rem] border border-green-800 bg-gradient-to-br from-[#004d1f] via-[#006400] to-[#0a7a31] p-6 text-white shadow-[0_24px_50px_rgba(0,57,20,0.24)]">
               <h3 className="mb-3 text-2xl font-bold text-white">Location</h3>
-              <p className="text-lg text-green-100">Say Yes Learning Schools</p>
-              <p className="text-green-100">Malawi</p>
+              <p className="text-lg text-white">Say Yes Learning Schools</p>
+              <p className="text-white/95">Malawi</p>
             </div>
 
             <div className="grid-card p-6">
@@ -896,10 +904,10 @@ Message: ${message}`;
               <p className="text-gray-700">7:30 AM - 4:00 PM</p>
             </div>
 
-            <div className="section-panel bg-[#0f3f1e] p-6 text-white">
+            <div className="overflow-hidden rounded-[1.5rem] border border-green-900 bg-gradient-to-br from-[#0a3518] via-[#0f4a22] to-[#14652d] p-6 text-white shadow-[0_24px_50px_rgba(0,46,18,0.26)]">
               <h3 className="mb-3 text-2xl font-bold text-white">Connect With Us</h3>
-              <p className="mb-4 text-green-100">Reach out directly for partnership, enrolment, and support conversations.</p>
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+              <p className="mb-4 text-white/95">Reach out directly for partnership, enrolment, and support conversations.</p>
+              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/20">
                 <WhatsAppIcon className="h-4 w-4" />
                 Chat on WhatsApp
               </a>
