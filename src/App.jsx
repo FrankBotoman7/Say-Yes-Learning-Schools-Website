@@ -1,4 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
+// Animation utilities
+const useScrollAnimation = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, []);
+
+  return [ref, isVisible];
+};
+
+// Animated section wrapper
+const AnimatedSection = ({ children, className = "", delay = 0 }) => {
+  const [ref, isVisible] = useScrollAnimation();
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Page transition wrapper
+const PageTransition = ({ children, isActive }) => {
+  return (
+    <div
+      className={`transition-all duration-500 ease-in-out ${
+        isActive
+          ? "opacity-100 transform translate-x-0"
+          : "opacity-0 transform translate-x-4"
+      }`}
+    >
+      {children}
+    </div>
+  );
+};
+
+// Loading spinner component
+const LoadingSpinner = () => (
+  <div className="fixed inset-0 bg-white z-50 flex items-center justify-center">
+    <div className="animate-spin rounded-full h-16 w-16 border-4 border-[#006400] border-t-transparent"></div>
+  </div>
+);
 
 const navItems = ["Home", "About", "Programs", "Team", "Gallery", "Contact"];
 
@@ -18,36 +86,37 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed w-full bg-[#006400] shadow-lg z-50">
+    <nav className="fixed w-full bg-[#006400] shadow-lg z-50 backdrop-blur-sm bg-opacity-95">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 group">
             <img
               src="/images/SYLS-Logo.jpg.jpeg"
               alt="SYLS Logo"
-              className="h-10 w-10 object-contain rounded-md"
+              className="h-10 w-10 object-contain rounded-md transition-transform group-hover:scale-110"
             />
             <button
               onClick={() => setCurrentPage("Home")}
-              className="text-2xl font-bold text-green-100 hover:text-white transition"
+              className="text-2xl font-bold text-green-100 hover:text-white transition-all hover:scale-105"
             >
               Say Yes Learning schools
             </button>
           </div>
 
           <div className="hidden md:flex space-x-1">
-            {navItems.map((item) => (
+            {navItems.map((item, index) => (
               <button
                 key={item}
                 type="button"
                 onClick={() => currentPage !== item && setCurrentPage(item)}
                 disabled={currentPage === item}
                 aria-current={currentPage === item ? "page" : undefined}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-all transform hover:scale-105 ${
                   currentPage === item
-                    ? "bg-green-500 text-green-950 cursor-default"
-                    : "text-green-100 hover:bg-green-700 hover:text-white"
+                    ? "bg-green-500 text-green-950 cursor-default shadow-md"
+                    : "text-green-100 hover:bg-green-700 hover:text-white hover:shadow-lg"
                 }`}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 {item}
               </button>
@@ -57,16 +126,16 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-amber-100 hover:text-white focus:outline-none"
+              className="text-amber-100 hover:text-white focus:outline-none transition-all hover:scale-110 p-2 rounded-md hover:bg-green-700"
             >
-              {isOpen ? "✕" : "☰"}
+              <span className="text-xl">{isOpen ? "✕" : "☰"}</span>
             </button>
           </div>
         </div>
 
         {isOpen && (
-          <div className="md:hidden pb-3">
-            {navItems.map((item) => (
+          <div className="md:hidden pb-3 animate-slide-in-left">
+            {navItems.map((item, index) => (
               <button
                 key={item}
                 type="button"
@@ -78,11 +147,12 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
                 }}
                 disabled={currentPage === item}
                 aria-current={currentPage === item ? "page" : undefined}
-                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium ${
+                className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-all hover:scale-105 ${
                   currentPage === item
                     ? "bg-green-500 text-green-950 cursor-default"
                     : "text-green-100 hover:bg-green-700 hover:text-white"
                 }`}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 {item}
               </button>
@@ -208,7 +278,7 @@ const HomePage = ({ setCurrentPage }) => {
           {/* Arrow Controls */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110 animate-pulse"
             aria-label="Previous slide"
           >
             <svg
@@ -228,7 +298,7 @@ const HomePage = ({ setCurrentPage }) => {
 
           <button
             onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full transition-all hover:scale-110 animate-pulse"
             aria-label="Next slide"
           >
             <svg
@@ -247,28 +317,32 @@ const HomePage = ({ setCurrentPage }) => {
           </button>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col justify-center items-center text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight animate-fade-in-up">
               {heroSlides[currentSlide].titleSub}
               <span className="block text-white">
                 {heroSlides[currentSlide].titleMain}
               </span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl">
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-100 mb-8 max-w-3xl animate-fade-in-up animation-delay-200">
               {heroSlides[currentSlide].caption}
             </p>
             <button
               onClick={() => setCurrentPage("Contact")}
-              className="bg-[#006400] hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all transform hover:scale-105"
+              className="bg-[#006400] hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-all transform hover:scale-105 hover:shadow-lg animate-fade-in-up animation-delay-400"
             >
               Learn More
             </button>
 
-            <div className="mt-8 flex gap-3">
+            <div className="mt-8 flex gap-3 animate-fade-in-up animation-delay-600">
               {heroSlides.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
-                  className={`h-3 w-3 rounded-full transition-all ${idx === currentSlide ? "bg-white scale-110" : "bg-white/60 hover:bg-white"}`}
+                  className={`h-3 w-3 rounded-full transition-all hover:scale-125 ${
+                    idx === currentSlide
+                      ? "bg-white scale-110 animate-pulse"
+                      : "bg-white/60 hover:bg-white"
+                  }`}
                   aria-label={`Slide ${idx + 1}`}
                 />
               ))}
@@ -277,84 +351,94 @@ const HomePage = ({ setCurrentPage }) => {
         </div>
       </section>
 
-      <section className="mt-6 p-6 bg-[#006400] rounded-lg shadow-lg border-l-4 border-green-600">
-        <h2 className="text-2xl font-bold text-white mb-4 text-center">
-          Our Mission
-        </h2>
-        <p className="text-green-100 text-lg leading-relaxed text-center max-w-4xl mx-auto">
-          Say Yes Learning School's mission in Malawi is to deliver quality
-          education to learners of all ages especially girls who have lagged
-          behind in education for years in Malawi ranging from grade 1-8. Say
-          Yes Learning Schools main goal is to support learners obtain
-          inquisitive search for knowledge with evidence based methods of
-          teaching.
-        </p>
-      </section>
-
-      <section className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { number: "11", label: "Board Members" },
-              { number: "100%", label: "Commitment" },
-              { number: "∞", label: "Potential" },
-            ].map((stat, idx) => (
-              <div
-                key={idx}
-                className="text-center p-6 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
-              >
-                <div className="text-4xl font-bold text-[#006400] mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-700">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
-            Our <span className="text-[#006400]">Core Values</span>
+      <AnimatedSection delay={100}>
+        <section className="mt-6 p-6 bg-[#006400] rounded-lg shadow-lg border-l-4 border-green-600 hover:shadow-2xl transition-shadow duration-300">
+          <h2 className="text-2xl font-bold text-white mb-4 text-center">
+            Our Mission
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: "🛡️",
-                title: "Child Safety",
-                desc: "Ensuring the protection and well-being of every child",
-              },
-              {
-                icon: "🤝",
-                title: "Integrity",
-                desc: "Operating with honesty and strong moral principles",
-              },
-              {
-                icon: "🙏",
-                title: "Respect & Honesty",
-                desc: "Treating others with dignity and maintaining truthfulness",
-              },
-              {
-                icon: "🌍",
-                title: "Diversity & Inclusiveness",
-                desc: "Embracing all backgrounds and ensuring equal opportunities",
-              },
-            ].map((value, idx) => (
-              <div
-                key={idx}
-                className="p-6 bg-[#006400] rounded-lg hover:shadow-xl transition-all transform hover:scale-105 border border-green-600"
-              >
-                <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  {value.title}
-                </h3>
-                <p className="text-green-100">{value.desc}</p>
-              </div>
-            ))}
+          <p className="text-green-100 text-lg leading-relaxed text-center max-w-4xl mx-auto">
+            Say Yes Learning School's mission in Malawi is to deliver quality
+            education to learners of all ages especially girls who have lagged
+            behind in education for years in Malawi ranging from grade 1-8. Say
+            Yes Learning Schools main goal is to support learners obtain
+            inquisitive search for knowledge with evidence based methods of
+            teaching.
+          </p>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection delay={200}>
+        <section className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-50">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                { number: "11", label: "Board Members" },
+                { number: "100%", label: "Commitment" },
+                { number: "∞", label: "Potential" },
+              ].map((stat, idx) => (
+                <div
+                  key={idx}
+                  className="text-center p-6 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-all transform hover:scale-105 hover:-translate-y-1"
+                  style={{ animationDelay: `${idx * 150}ms` }}
+                >
+                  <div className="text-4xl font-bold text-[#006400] mb-2 animate-count-up">
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-700">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection delay={300}>
+        <section className="py-10 px-4 sm:px-6 lg:px-8 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-8 text-gray-900">
+              Our <span className="text-[#006400]">Core Values</span>
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  icon: "🛡️",
+                  title: "Child Safety",
+                  desc: "Ensuring the protection and well-being of every child",
+                },
+                {
+                  icon: "🤝",
+                  title: "Integrity",
+                  desc: "Operating with honesty and strong moral principles",
+                },
+                {
+                  icon: "🙏",
+                  title: "Respect & Honesty",
+                  desc: "Treating others with dignity and maintaining truthfulness",
+                },
+                {
+                  icon: "🌍",
+                  title: "Diversity & Inclusiveness",
+                  desc: "Embracing all backgrounds and ensuring equal opportunities",
+                },
+              ].map((value, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 bg-[#006400] rounded-lg hover:shadow-2xl transition-all transform hover:scale-105 hover:-translate-y-2 border border-green-600 group"
+                  style={{ animationDelay: `${idx * 100}ms` }}
+                >
+                  <div className="text-5xl mb-4 group-hover:animate-bounce">
+                    {value.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {value.title}
+                  </h3>
+                  <p className="text-green-100">{value.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
     </div>
   );
 };
@@ -364,62 +448,84 @@ const AboutPage = ({ setCurrentPage }) => {
   return (
     <div className="pt-20 pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-gray-900 mb-12">
-          About Say Yes Learning Schools
-        </h1>
+        <AnimatedSection>
+          <h1 className="text-5xl font-bold text-gray-900 mb-12 text-center">
+            About Say Yes Learning Schools
+          </h1>
+        </AnimatedSection>
 
         <div className="space-y-12">
-          <div>
-            <h2 className="text-3xl font-bold text-[#006400] mb-6">
-              Who We Are
-            </h2>
-            <p className="text-gray-700 leading-relaxed text-lg">
-              Say Yes Learning schools is a Malawian non-profit that aims at
-              improving learners' education in primary school and prepare them
-              to obtain high grades with teaching methods that are evidence
-              based. We take action in promoting children's education for a
-              successful future. Say Yes Learning Schools will be built in area
-              44, TA Tsabango. We strive to educate and protect children's
-              future.
-            </p>
-          </div>
+          <AnimatedSection delay={100}>
+            <div>
+              <h2 className="text-3xl font-bold text-[#006400] mb-6">
+                Who We Are
+              </h2>
+              <p className="text-gray-700 leading-relaxed text-lg">
+                Say Yes Learning schools is a Malawian non-profit that aims at
+                improving learners' education in primary school and prepare them
+                to obtain high grades with teaching methods that are evidence
+                based. We take action in promoting children's education for a
+                successful future. Say Yes Learning Schools will be built in
+                area 44, TA Tsabango. We strive to educate and protect
+                children's future.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div>
-            <h2 className="text-3xl font-bold text-[#006400] mb-6">
-              Our Mission
-            </h2>
-            <p className="text-gray-700 leading-relaxed text-lg">
-              Say Yes Learning School's mission in Malawi is to deliver quality
-              education to learners of all ages especially girls who have lagged
-              behind in education for years in Malawi ranging from grade 1-8.
-              Say Yes Learning Schools main goal is to support learners obtain
-              inquisitive search for knowledge with evidence based methods of
-              teaching.
-            </p>
-          </div>
+          <AnimatedSection delay={200}>
+            <div>
+              <h2 className="text-3xl font-bold text-[#006400] mb-6">
+                Our Mission
+              </h2>
+              <p className="text-gray-700 leading-relaxed text-lg">
+                Say Yes Learning School's mission in Malawi is to deliver
+                quality education to learners of all ages especially girls who
+                have lagged behind in education for years in Malawi ranging from
+                grade 1-8. Say Yes Learning Schools main goal is to support
+                learners obtain inquisitive search for knowledge with evidence
+                based methods of teaching.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div>
-            <h2 className="text-3xl font-bold text-[#006400] mb-6">
-              Our Vision
-            </h2>
-            <p className="text-gray-700 leading-relaxed text-lg">
-              Our vision at Say Yes Learning Schools in Malawi is to nurture
-              leaders of tomorrow and empower learners especially (girls) to
-              attain and retain educational knowledge.
-            </p>
-          </div>
+          <AnimatedSection delay={300}>
+            <div>
+              <h2 className="text-3xl font-bold text-[#006400] mb-6">
+                Our Vision
+              </h2>
+              <p className="text-gray-700 leading-relaxed text-lg">
+                Our vision at Say Yes Learning Schools in Malawi is to nurture
+                leaders of tomorrow and empower learners especially (girls) to
+                attain and retain educational knowledge.
+              </p>
+            </div>
+          </AnimatedSection>
 
-          <div>
-            <h2 className="text-3xl font-bold text-[#006400] mb-6">
-              Our Values
-            </h2>
-            <ul className="text-gray-700 leading-relaxed text-lg space-y-2">
-              <li>• Child safety</li>
-              <li>• Integrity</li>
-              <li>• Respect and honesty</li>
-              <li>• Diversity and inclusiveness</li>
-            </ul>
-          </div>
+          <AnimatedSection delay={400}>
+            <div>
+              <h2 className="text-3xl font-bold text-[#006400] mb-6">
+                Our Values
+              </h2>
+              <ul className="text-gray-700 leading-relaxed text-lg space-y-2 stagger-children">
+                <li className="flex items-center">
+                  <span className="text-[#006400] mr-2">•</span>
+                  Child safety
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#006400] mr-2">•</span>
+                  Integrity
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#006400] mr-2">•</span>
+                  Respect and honesty
+                </li>
+                <li className="flex items-center">
+                  <span className="text-[#006400] mr-2">•</span>
+                  Diversity and inclusiveness
+                </li>
+              </ul>
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </div>
@@ -1023,13 +1129,32 @@ const Footer = ({ currentPage, setCurrentPage }) => {
 // Main App Component
 export default function App() {
   const [currentPage, setCurrentPage] = useState("Home");
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Initial load animation
+    setTimeout(() => setIsLoaded(true), 100);
+  }, []);
+
+  const handlePageChange = (page) => {
+    if (page !== currentPage) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentPage(page);
+        setIsTransitioning(false);
+      }, 250);
+    }
+  };
 
   const renderPage = () => {
+    const pageProps = { setCurrentPage: handlePageChange };
+
     switch (currentPage) {
       case "Home":
-        return <HomePage setCurrentPage={setCurrentPage} />;
+        return <HomePage {...pageProps} />;
       case "About":
-        return <AboutPage setCurrentPage={setCurrentPage} />;
+        return <AboutPage {...pageProps} />;
       case "Programs":
         return <ProgramsPage />;
       case "Team":
@@ -1039,16 +1164,30 @@ export default function App() {
       case "Contact":
         return <ContactPage />;
       default:
-        return <HomePage setCurrentPage={setCurrentPage} />;
+        return <HomePage {...pageProps} />;
     }
   };
 
   return (
-    <div className="bg-white min-h-screen text-gray-900">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <FixedMarquee />
-      <main className="pt-10">{renderPage()}</main>
-      <Footer currentPage={currentPage} setCurrentPage={setCurrentPage} />
-    </div>
+    <>
+      {!isLoaded && <LoadingSpinner />}
+      <div
+        className={`bg-white min-h-screen text-gray-900 transition-opacity duration-1000 ${
+          isLoaded ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Navigation
+          currentPage={currentPage}
+          setCurrentPage={handlePageChange}
+        />
+        <FixedMarquee />
+        <main className="pt-10">
+          <PageTransition isActive={!isTransitioning}>
+            {renderPage()}
+          </PageTransition>
+        </main>
+        <Footer currentPage={currentPage} setCurrentPage={handlePageChange} />
+      </div>
+    </>
   );
 }
