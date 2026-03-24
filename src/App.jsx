@@ -695,22 +695,27 @@ const TeamPage = () => {
   return (
     <div className="pt-20 pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">Board Members</h1>
-        <p className="text-xl text-gray-700 mb-12">
-          Dedicated leaders guiding Say Yes Learning Schools
-        </p>
+        <AnimatedSection>
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            Board Members
+          </h1>
+          <p className="text-xl text-gray-700 mb-12">
+            Dedicated leaders guiding Say Yes Learning Schools
+          </p>
+        </AnimatedSection>
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {boardMembers.map((member, idx) => (
-            <div
+            <AnimatedSection
               key={idx}
-              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all bg-white shadow-md hover:shadow-lg flex flex-col"
+              delay={idx * 100}
+              className="group relative overflow-hidden rounded-lg border border-gray-300 hover:border-[#006400] transition-all duration-300 bg-white shadow-md hover:shadow-xl hover-lift flex flex-col"
             >
               <div className="w-full h-48 flex-shrink-0 overflow-hidden bg-[#006400]">
                 <img
                   src={member.photo}
                   alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   onError={(e) => {
                     e.target.src =
                       'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23006400" width="200" height="200"/%3E%3Ctext x="50%%" y="50%%" fill="%23fff" font-size="12" text-anchor="middle" dy=".3em"%3EPhoto unavailable%3C/text%3E%3C/svg%3E';
@@ -719,10 +724,10 @@ const TeamPage = () => {
               </div>
               <div className="flex-1 p-6 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-bold text-gray-900 text-lg mb-1">
+                  <h3 className="font-bold text-gray-900 text-lg mb-1 group-hover:text-[#006400] transition-colors">
                     {member.name}
                   </h3>
-                  <p className="text-[#006400] font-semibold mb-3">
+                  <p className="text-[#006400] font-semibold mb-3 group-hover:scale-105 transition-transform">
                     {member.role}
                   </p>
                   <p className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
@@ -730,20 +735,22 @@ const TeamPage = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-[#006400] rounded-lg border border-green-600">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Leadership & Governance
-          </h2>
-          <p className="text-green-100 mb-4">
-            Our board members are committed to providing strategic oversight and
-            ensuring that Say Yes Learning Schools maintains the highest
-            standards of educational excellence and institutional integrity.
-          </p>
-        </div>
+        <AnimatedSection delay={400}>
+          <div className="mt-16 p-8 bg-[#006400] rounded-lg border border-green-600 hover:shadow-2xl transition-shadow duration-300">
+            <h2 className="text-2xl font-bold text-white mb-4">
+              Leadership & Governance
+            </h2>
+            <p className="text-green-100 mb-4">
+              Our board members are committed to providing strategic oversight
+              and ensuring that Say Yes Learning Schools maintains the highest
+              standards of educational excellence and institutional integrity.
+            </p>
+          </div>
+        </AnimatedSection>
       </div>
     </div>
   );
