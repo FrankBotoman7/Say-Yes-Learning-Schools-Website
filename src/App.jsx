@@ -96,16 +96,16 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
 
 const FixedMarquee = () => {
   const newsHeadlines = [
-    "SYLS: 11 dedicated board members guiding educational excellence",
-    "Academic Excellence Program: Mathematics, Sciences, Languages, Social Studies",
-    "Sports & Recreation: Team sports, individual sports, fitness programs, competitions",
-    "Arts & Culture: Music, visual arts, drama, cultural events",
-    "Life Skills: Leadership, ethics, communication, problem solving",
-    "SYLS Mission: Quality education for leaders, innovators, responsible citizens",
-    "Experienced faculty, comprehensive curriculum, state-of-the-art facilities",
-    "Emphasis on character development and leadership training",
-    "Strong community involvement and parental engagement",
-    "Proven track record of student excellence and achievement",
+    "Say Yes Learning Schools: Empowering Girls' Education in Malawi",
+    "Evidence-Based Teaching Methods for Grades 1-8 Learners",
+    "Building Quality Education in Area 44, TA Tsabango, Lilongwe",
+    "Child Safety First: Protecting Every Learner's Future",
+    "Integrity & Respect: Core Values Driving Educational Excellence",
+    "Diversity & Inclusiveness: Welcoming All Learners to Thrive",
+    "Malawian Non-Profit Committed to Educational Transformation",
+    "Supporting Inquisitive Learning Through Proven Teaching Methods",
+    "Quality Education for Leaders, Innovators, and Responsible Citizens",
+    "Fundraising for School Construction: Building Tomorrow's Leaders Today",
   ];
 
   const marqueeHeadlines = [...newsHeadlines, ...newsHeadlines];
