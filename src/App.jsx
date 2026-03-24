@@ -1145,6 +1145,8 @@ export default function App() {
   }, []);
 
   const handlePageChange = (page) => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
     if (page !== currentPage) {
       setIsTransitioning(true);
       setTimeout(() => {
