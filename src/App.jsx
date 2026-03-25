@@ -720,11 +720,11 @@ const TeamPage = () => {
         </div>
 
         <AnimatedSection delay={400}>
-          <div className="mt-16 section-panel bg-[#006400] p-8 text-white sm:p-10">
+          <div className="mt-16 overflow-hidden rounded-[1.75rem] border border-green-800 bg-gradient-to-br from-[#004d1f] via-[#006400] to-[#0a7a31] p-8 text-white shadow-[0_28px_60px_rgba(0,57,20,0.28)] sm:p-10">
             <h2 className="mb-4 text-3xl font-bold text-white">
               Leadership & Governance
             </h2>
-            <p className="text-lg leading-8 text-green-50/95">
+            <p className="text-lg leading-8 text-white">
               Our board members are committed to providing strategic oversight
               and ensuring that Say Yes Learning Schools maintains the highest
               standards of educational excellence and institutional integrity.
