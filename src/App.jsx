@@ -887,6 +887,7 @@ Message: ${message}`;
             <div className="overflow-hidden rounded-[1.5rem] border border-green-800 bg-gradient-to-br from-[#004d1f] via-[#006400] to-[#0a7a31] p-6 text-white shadow-[0_24px_50px_rgba(0,57,20,0.24)]">
               <h3 className="mb-3 text-2xl font-bold text-white">Location</h3>
               <p className="text-lg text-white">Say Yes Learning Schools</p>
+              <p className="text-white/95">Area 44, TA Tsabango, Lilongwe</p>
               <p className="text-white/95">Malawi</p>
             </div>
 
@@ -984,7 +985,9 @@ const Footer = ({ currentPage, setCurrentPage }) => {
                 lizzie.dube@yahoo.com
               </a>
               <a
-                href="tel:+265885871388"
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block transition hover:text-white"
               >
                 +265 885 871 388
